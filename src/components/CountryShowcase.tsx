@@ -48,7 +48,7 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
                     onError={() => handleImageError(country.flag)} 
                   />
                 )}
-                <h3 className="font-medium text-gray-800 mt-auto">{country.name}</h3>
+                <h3 className="font-medium text-gray-800 mt-auto text-sm md:text-base">{country.name}</h3>
               </CardContent>
             </Card>
           ))}
