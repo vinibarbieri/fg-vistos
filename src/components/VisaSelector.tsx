@@ -135,6 +135,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
                 <CardHeader className="text-center">
                   <CardTitle className="text-xl text-secondary">{plan.name}</CardTitle>
                   <div className="text-3xl font-bold text-primary">{plan.price}</div>
+                  <p className="text-sm text-gray-500 mt-2">* Valor não inclui taxa consular</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
