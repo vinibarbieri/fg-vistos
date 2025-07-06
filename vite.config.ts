@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => ({
-  base: command === 'build' ? "/fg-vistos-gateway/" : "/",
+  base: command === 'build' ? "/fg-vistos/" : "/",
 
   server: {
     host: "::",

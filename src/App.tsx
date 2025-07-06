@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const basename = import.meta.env.PROD ? "/fg-vistos-gateway/" : "/";
+const basename = import.meta.env.PROD ? "/fg-vistos/" : "/";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
