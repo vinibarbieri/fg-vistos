@@ -28,7 +28,7 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-7 gap-4 max-w-7xl mx-auto">
           {cnCountries.map((country) => (
             <Card 
               key={country.name} 
@@ -37,14 +37,14 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
             >
               <CardContent className="p-6 text-center flex flex-col items-center justify-center h-full">
                 {imageErrors[country.flag] ? (
-                  <span className="text-5xl mb-2" role="img" aria-label={`Bandeira de ${country.name}`}>
+                  <span className="text-4xl sm:text-5xl mb-2" role="img" aria-label={`Bandeira de ${country.name}`}>
                     {country.emoji}
                   </span>
                 ) : (
                   <img
                     src={getFlagImage(country)}
                     alt={`Bandeira de ${country.name}`}
-                    className='mx-auto mb-4 h-20 object-cover'
+                    className='mx-auto mb-4 h-12 md:h-16 object-cover rounded-md'
                     onError={() => handleImageError(country.flag)} 
                   />
                 )}

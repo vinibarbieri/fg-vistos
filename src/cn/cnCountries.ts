@@ -8,8 +8,9 @@ export const cnCountries: Country[] = [
   { name: 'Estados Unidos', flag: 'us', emoji: '🇺🇸' },
   { name: 'Canadá', flag: 'ca', emoji: '🇨🇦' },
   { name: 'Reino Unido', flag: 'gb', emoji: '🇬🇧' },
-  { name: 'Alemanha', flag: 'de', emoji: '🇩🇪' },
-  { name: 'França', flag: 'fr', emoji: '🇫🇷' },
+  { name: 'Portugal', flag: 'pt', emoji: '' },
+  { name: 'China', flag: 'cn', emoji: '' },
+  { name: 'Índia', flag: 'in', emoji: '' },
   { name: 'Austrália', flag: 'au', emoji: '🇦🇺' },
 ];
 
