@@ -63,11 +63,11 @@ export function Features({
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 lg:gap-16 gap-8 items-center">
+        <div className="grid lg:grid-cols-2 lg:gap-16 gap-8 items-start">
           {/* Left Side - Features with Progress Lines */}
           <div
             ref={containerRef}
-            className="lg:space-y-8 md:space-x-6 lg:space-x-0 overflow-x-auto overflow-hidden no-scrollbar lg:overflow-visible flex lg:flex lg:flex-col flex-row order-1 pb-4 scroll-smooth"
+            className="space-y-4 lg:space-y-8 overflow-x-auto overflow-hidden no-scrollbar lg:overflow-visible flex flex-col order-1 scroll-smooth"
           >
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -85,10 +85,10 @@ export function Features({
                   {/* Feature Content */}
                   <div
                     className={`
-                    flex lg:flex-row flex-col items-start space-x-4 p-3 max-w-sm md:max-w-sm lg:max-w-2xl transition-all duration-300
+                    flex flex-row items-start space-x-4 p-3 w-full max-w-md md:max-w-lg lg:max-w-2xl transition-all duration-300
                     ${
                       isActive
-                        ? "bg-white dark:bg-black/80 md:shadow-xl dark:drop-shadow-lg rounded-xl md:border dark:border-none border-gray-200"
+                        ? "bg-white dark:bg-black/80 shadow-xl dark:drop-shadow-lg rounded-xl border dark:border-none border-gray-200"
                         : ""
                     }
                   `}
@@ -96,7 +96,7 @@ export function Features({
                     {/* Icon */}
                     <div
                       className={`
-                      p-3 hidden md:block rounded-full transition-all duration-300
+                      p-3 rounded-full transition-all duration-300
                       ${
                         isActive
                           ? "bg-primary text-white"
@@ -111,7 +111,7 @@ export function Features({
                     <div className="flex-1">
                       <h3
                         className={`
-                        text-lg md:mt-4 lg:mt-0 font-semibold mb-2 transition-colors duration-300
+                        text-lg font-semibold mb-2 transition-colors duration-300
                         ${
                           isActive
                             ? "text-gray-900 dark:text-white"
