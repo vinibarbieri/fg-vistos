@@ -12,7 +12,6 @@ export default defineConfig(({ mode, command }) => ({
   },
   plugins: [
     react(),
-    mode === 'development' &&
   ].filter(Boolean),
   resolve: {
     alias: {
