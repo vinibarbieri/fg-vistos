@@ -119,7 +119,12 @@ const ProcessRoadmap = () => {
               <p className="text-gray-600 mb-6">
                 Entre em contato conosco e inicie seu processo de visto hoje mesmo
               </p>
-              <button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 flex items-center mx-auto">
+              <button 
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 flex items-center mx-auto"
+                onClick={() => {
+                  window.location.href = 'https://api.whatsapp.com/send?phone=5548998231163&text=Ol%C3%A1,%20estou%20interessado%20no%20servi%C3%A7o%20de%20vistos%20consulares';
+                }}
+              >
                 Começar Agora
                 <ArrowRight className="w-5 h-5 ml-2" />
               </button>

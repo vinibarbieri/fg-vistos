@@ -17,7 +17,7 @@ const Index = () => {
       />
       <WhyChooseUs />
       <ProcessRoadmap />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Footer />
     </div>
   );

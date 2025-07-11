@@ -1,6 +1,7 @@
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card'
+import { MessageCircle } from 'lucide-react';
 
 const WhyChooseUs = () => {
   const features = [
@@ -58,7 +59,7 @@ const WhyChooseUs = () => {
             size="lg" 
             className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg"
           >
-            💬 Falar no WhatsApp
+           <MessageCircle className="w-5 h-5 mr-2" /> Falar no WhatsApp
           </Button>
         </div>
       </div>
