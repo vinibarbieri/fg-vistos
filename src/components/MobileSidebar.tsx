@@ -29,8 +29,6 @@ interface MobileSidebarProps {
   services: Array<{ name: string; href: string }>;
 }
 
-
-
 // Components
 const MobileMenuItem = ({ 
   item, 

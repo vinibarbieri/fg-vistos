@@ -68,12 +68,12 @@ export const cnMainMenu: MenuItem[] = [
     iconName: "Briefcase",
     items: cnServicesMenu
   },
-  {
-    title: "Recursos",
-    url: "#",
-    iconName: "BookOpen",
-    items: cnResourcesMenu
-  },
+  // {
+  //   title: "Recursos",
+  //   url: "#",
+  //   iconName: "BookOpen",
+  //   items: cnResourcesMenu
+  // },
   { 
     title: "Sobre Nós", 
     url: "/sobre-nos", 
