@@ -11,6 +11,6 @@ export type VisaTypesT = {
     id: string;
     name: string;
     country: string;
-    visaType: string;
+    visa_type: string;
     active: boolean;
 };

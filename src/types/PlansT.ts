@@ -11,9 +11,9 @@ import { VisaTypesT } from "./VisaTypesT";
  */
 export type PlansT = {
     id: string;
-    planName: string;
+    plan_name: string;
     description: string;
     price: number;
     active: boolean;
-    visaTypeId: VisaTypesT["id"];
+    visa_type_id: VisaTypesT["id"];
 };
