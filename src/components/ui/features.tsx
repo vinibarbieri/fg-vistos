@@ -56,7 +56,7 @@ export function Features({
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-            Nossos Serviços
+            Selecione o serviço que você precisa
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-secondary mt-4 mb-6">
             Soluções Completas para Sua Viagem
