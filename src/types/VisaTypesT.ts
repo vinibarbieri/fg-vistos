@@ -11,6 +11,6 @@ export type VisaTypesT = {
     id: string;
     name: string;
     country: string;
-    visa_type: string;
+    visa_type: string; // visto || eta
     active: boolean;
 };

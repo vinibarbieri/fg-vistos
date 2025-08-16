@@ -5,19 +5,29 @@ import { Button } from '@/components/ui/button';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
 import { cnCountries, isValidCountry } from '@/cn/cnCountries';
 import { useVisaPlans } from '@/hooks/useVisaPlans';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useCountryVisaTypes from '@/hooks/useCountryVisaTypes';
 
 interface VisaSelectorProps {
   selectedCountryProp?: string;
   showWhatsAppButton?: boolean;
 }
 
+// b1, eta
+
 const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaSelectorProps) => {
-  const [selectedCountry, setSelectedCountry] = useState('Estados Unidos');
-  const [selectedVisaType, setSelectedVisaType] = useState('Turismo');
-  const visaTypes = ['Turismo', 'Negócios', 'Estudo', 'Trabalho'];
+  const [selectedCountry, setSelectedCountry] = useState('eua');
+  const [selectedVisaType, setSelectedVisaType] = useState('visto');
+
+  const { data: visaTypes, isLoading: isLoadingVisaTypes, isError: isVisaTypesError, error: visaTypesError } = useCountryVisaTypes({
+    country: selectedCountry
+  });
+
+  console.log('Selected visa:', selectedVisaType);
 
   // Buscar planos do Supabase
-  const { plans, isLoading, isError, error } = useVisaPlans({ 
+  const { plans, isLoading: isLoadingPlans, isError: isPlansError, error: plansError } = useVisaPlans({ 
     country: selectedCountry, 
     visa_type: selectedVisaType 
   });
@@ -35,23 +45,23 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
   };
 
   // Renderizar erro
-  if (isError) {
+  if (isPlansError) {
     return (
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-secondary mb-6">
-              Escolha seu Destino e Tipo de Visto
+              Encontre o visto certo para o seu destino
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Selecione o país e tipo de visto desejado para ver nossos planos especializados
+              Selecione o país e tipo de visto desejado para ver nossos planos
             </p>
           </div>
           <div className="flex justify-center items-center py-20">
             <AlertCircle className="h-12 w-12 text-red-500 mr-3" />
             <div className="text-center">
               <p className="text-lg text-red-600 font-medium">Erro ao carregar planos</p>
-              <p className="text-gray-600">{error?.message || 'Tente novamente mais tarde'}</p>
+              <p className="text-gray-600">{plansError?.message || 'Tente novamente mais tarde'}</p>
             </div>
           </div>
         </div>
@@ -64,10 +74,10 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-secondary mb-6">
-            Escolha seu Destino e Tipo de Visto
+            Encontre o visto certo para o seu destino
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Selecione o país e tipo de visto desejado para ver nossos planos especializados
+            Selecione o país e tipo de visto desejado para ver nossos planos
           </p>
         </div>
 
@@ -81,7 +91,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
               >
                 {cnCountries.map(country => (
-                  <option key={country.name} value={country.name}>
+                  <option key={country.key} value={country.key}>
                     {country.name}
                   </option>
                 ))}
@@ -95,14 +105,29 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
                 onChange={(e) => setSelectedVisaType(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
               >
-                {visaTypes.map(type => (
-                  <option key={type} value={type}>{type}</option>
-                ))}
+                {isVisaTypesError || visaTypes?.length === 0 ? (
+                  <option>
+                    Nenhum encontrado
+                  </option>
+                ) : isLoadingVisaTypes ? (
+                  <option>
+                    Carregando...
+                  </option>
+                ) : (
+                  <>
+                    <option value="Selecione um tipo de visto">
+                      Selecione um tipo de visto
+                    </option>
+                    {visaTypes?.map(visa => (
+                      <option key={visa.name} value={visa.name}>{visa.name}</option>
+                    ))}
+                  </>
+                )}
               </select>
             </div>
           </div>
 
-          {isLoading && (
+          {isLoadingPlans && (
             <div className="flex justify-center items-center py-20">
               <Loader2 className="h-12 w-12 animate-spin text-primary" />
               <span className="ml-3 text-lg text-gray-600">Carregando planos...</span>
@@ -113,13 +138,6 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {plans.map((plan, index) => (
                 <Card key={plan.id} className={`relative ${index === 1 ? 'border-primary border-2 transform scale-105' : ''}`}>
-                  {index === 1 && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">
-                        Mais Popular
-                      </span>
-                    </div>
-                  )}
                   <CardHeader className="text-center">
                     <CardTitle className="text-xl text-secondary">{plan.plan_name}</CardTitle>
                     <div className="text-3xl font-bold text-primary">{formatPrice(plan.price)}</div>
@@ -164,13 +182,29 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
               ))}
             </div>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-lg text-gray-600">
-                Nenhum plano encontrado para {selectedCountry} - {selectedVisaType}
+            <div className="text-center py-10">
+              {selectedCountry === 'Outros Destinos' ? (
+                <p className="text-lg text-gray-600 mb-2">
+                  Para destinos não listados, clique abaixo e fale com nossa equipe:
+                </p>
+              ) : (
+              <p className="text-lg text-gray-600 mb-2">
+                Clique abaixo e fale com a nossa equipe sobre o visto {selectedVisaType.toLowerCase()} para o {selectedCountry}
               </p>
-              <p className="text-gray-500 mt-2">
-                Tente selecionar outro país ou tipo de visto
-              </p>
+              )}
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="bg-primary text-white hover:bg-white hover:bg-secondary hover:text-white px-8 py-4 text-lg"
+                onClick={() => {
+                  const message = `Olá, estou planejando uma viagem de *${selectedVisaType.toLowerCase()}* para o *${selectedCountry}* e preciso de mais informações sobre o processo. 
+                  \nPoderiam me auxiliar com os próximos passos?`;
+                  const encodedMessage = encodeURIComponent(message);
+                  window.location.href = `https://api.whatsapp.com/send?phone=5548998231163&text=${encodedMessage}`;
+                }}
+              >
+                <FontAwesomeIcon icon={faWhatsapp} />Fale com um atendente
+              </Button>
             </div>
           )}
         </div>
