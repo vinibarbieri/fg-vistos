@@ -1,5 +1,7 @@
 
 import { Button } from '@/components/ui/button';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
@@ -10,11 +12,11 @@ const Hero = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Seu <span className="text-primary">Visto Aprovado</span> com Segurança e Agilidade
+            Seu <span className="text-primary">Visto Aprovado</span> com Segurança e Eficiência
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in">
-            Mais de 20 anos de experiência e +5.000 vistos aprovados. 
-            Especialistas reais cuidando do seu sonho.
+            Consultoria especializada para sua viagem, com planos personalizados, pagamento
+            facilitado e suporte completo em todas as etapas.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
             <Button 
@@ -24,7 +26,7 @@ const Hero = () => {
                 navigate('/vistos');
               }}
             >
-              Solicitar Visto Agora
+              Solicitar Assessoria Agora
             </Button>
             <Button 
               variant="outline" 
@@ -34,7 +36,7 @@ const Hero = () => {
                 window.location.href = 'https://api.whatsapp.com/send?phone=5548998231163&text=Ol%C3%A1,%20estou%20interessado%20no%20servi%C3%A7o%20de%20vistos%20consulares';
               }}
             >
-              Falar com Especialista
+              <FontAwesomeIcon icon={faWhatsapp} />Fale com um atendente
             </Button>
           </div>
         </div>
