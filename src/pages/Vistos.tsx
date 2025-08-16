@@ -84,6 +84,7 @@ const Vistos = () => {
             <VisaSelector 
               selectedCountryProp={selectedCountryKeyFromShowcase}
               showWhatsAppButton={true}
+              filteredCountries={countriesWithVisto}
             />
           </div>
 
@@ -109,6 +110,7 @@ const Vistos = () => {
             <VisaSelector 
               selectedCountryProp={selectedCountryKeyFromShowcase}
               showWhatsAppButton={true}
+              filteredCountries={countriesWithEta}
             />
           </div>
 
