@@ -1,6 +1,8 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MessageCircle } from 'lucide-react';
 
 const WhyChooseUs = () => {
@@ -57,9 +59,12 @@ const WhyChooseUs = () => {
           </p>
           <Button 
             size="lg" 
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg"
+            className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg"
+            onClick={() => {
+              window.location.href = 'https://api.whatsapp.com/send?phone=5548998231163&text=Ol%C3%A1,%20estou%20interessado%20no%20servi%C3%A7o%20de%20vistos%20consulares';
+            }}
           >
-           <MessageCircle className="w-5 h-5 mr-2" /> Falar no WhatsApp
+            <FontAwesomeIcon icon={faWhatsapp} />Falar no WhatsApp
           </Button>
         </div>
       </div>
