@@ -202,9 +202,9 @@ const SobreNos = () => {
               
               <p className="text-lg sm:text-xl md:text-2xl opacity-90 leading-relaxed max-w-4xl mx-auto px-2">
                 A FG Vistos é uma empresa de assessoria consular com{' '}
-                <span className="font-semibold text-yellow-200">raízes familiares</span>, dedicada a
+                raízes familiares, dedicada a
                 transformar o processo de tirar vistos em algo{' '}
-                <span className="font-semibold text-yellow-200">simples, seguro e acessível</span>.
+                simples, seguro e acessível.
               </p>
             </div>
           </div>
