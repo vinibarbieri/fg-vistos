@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { cnCountries, isValidCountry } from '@/cn/cnCountries';
+import { cnCountries, isValidCountryKey } from '@/cn/cnCountries';
 
 interface FAQ {
   question: string;
@@ -47,8 +47,9 @@ const VisaFAQ = ({ selectedCountryFromSelector }: VisaFAQProps) => {
 
   // Atualiza o país selecionado quando recebe prop do VisaSelector
   useEffect(() => {
-    if (selectedCountryFromSelector && isValidCountry(selectedCountryFromSelector)) {
-      setSelectedCountry(selectedCountryFromSelector);
+    if (selectedCountryFromSelector && isValidCountryKey(selectedCountryFromSelector)) {
+      const country = cnCountries.find(c => c.key === selectedCountryFromSelector);
+      setSelectedCountry(country ? country.name : 'Estados Unidos');
     }
   }, [selectedCountryFromSelector]);
 

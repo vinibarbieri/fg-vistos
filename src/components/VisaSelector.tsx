@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
-import { cnCountries, Country, isValidCountry } from '@/cn/cnCountries';
+import { cnCountries, Country, isValidCountryKey } from '@/cn/cnCountries';
 import { useVisaPlans } from '@/hooks/useVisaPlans';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,12 +33,18 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
 
   // Atualiza o país selecionado quando recebe prop
   useEffect(() => {
-    if (selectedCountryProp && isValidCountry(selectedCountryProp)) {
+    if (selectedCountryProp && isValidCountryKey(selectedCountryProp)) {
       setSelectedCountry(selectedCountryProp);
     }
   }, [selectedCountryProp]);
 
   const countriesToShow = filteredCountries || cnCountries;
+
+  // Função para obter o nome do país pela chave
+  const getCountryNameByKey = (key: string): string => {
+    const country = cnCountries.find(c => c.key === key);
+    return country ? country.name : key;
+  };
 
   // Função para formatar preço
   const formatPrice = (price: number) => {
@@ -168,7 +174,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                           variant="outline"
                           className="w-full border-primary text-primary hover:bg-primary hover:text-white"
                           onClick={() => {
-                            const message = `Olá, estou planejando uma viagem de *${selectedVisaType.toLowerCase()}* para o *${selectedCountry}* e preciso de mais informações sobre o processo de visto. 
+                            const message = `Olá, estou planejando uma viagem de *${selectedVisaType.toLowerCase()}* para o *${getCountryNameByKey(selectedCountry)}* e preciso de mais informações sobre o processo de visto. 
                             \nTenho interesse no plano *${plan.plan_name}*. Poderiam me auxiliar com os próximos passos?`;
                             const encodedMessage = encodeURIComponent(message);
                             window.open(`https://api.whatsapp.com/send?phone=5548998231163&text=${encodedMessage}`, '_blank');
@@ -190,7 +196,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                 </p>
               ) : (
               <p className="text-lg text-gray-600 mb-2">
-                Clique abaixo e fale com a nossa equipe sobre o visto {selectedVisaType.toLowerCase()} para o {selectedCountry}
+                Clique abaixo e fale com a nossa equipe sobre o visto {selectedVisaType.toLowerCase()} para o {getCountryNameByKey(selectedCountry)}
               </p>
               )}
               <Button 
@@ -198,7 +204,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                 size="lg" 
                 className="bg-primary text-white hover:bg-white hover:bg-secondary hover:text-white px-8 py-4 text-lg"
                 onClick={() => {
-                  const message = `Olá, estou planejando uma viagem de *${selectedVisaType.toLowerCase()}* para o *${selectedCountry}* e preciso de mais informações sobre o processo. 
+                  const message = `Olá, estou planejando uma viagem de *${selectedVisaType.toLowerCase()}* para o *${getCountryNameByKey(selectedCountry)}* e preciso de mais informações sobre o processo. 
                   \nPoderiam me auxiliar com os próximos passos?`;
                   const encodedMessage = encodeURIComponent(message);
                   window.location.href = `https://api.whatsapp.com/send?phone=5548998231163&text=${encodedMessage}`;

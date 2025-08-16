@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { cnCountries, Country, getFlagImage } from '@/cn/cnCountries';
 
 interface CountryShowcaseProps {
-  onCountrySelect: (country: string) => void;
+  onCountrySelect: (countryKey: string) => void;
   filteredCountries?: Country[];
 }
 
@@ -36,7 +36,7 @@ const CountryShowcase = ({ onCountrySelect, filteredCountries }: CountryShowcase
             <Card 
               key={country.name} 
               className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
-              onClick={() => onCountrySelect(country.name)}
+              onClick={() => onCountrySelect(country.key)}
             >
               <CardContent className="p-6 text-center flex flex-col items-center justify-center h-full">
                 {imageErrors[country.flag] ? (

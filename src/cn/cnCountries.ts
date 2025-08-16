@@ -31,10 +31,10 @@ export const getCountryByFlag = (flag: string): Country | undefined => {
   return cnCountries.find(country => country.flag === flag);
 };
 
-// Função utilitária para verificar se um país existe
-export const isValidCountry = (name: string): boolean => {
-  return cnCountries.some(country => country.name === name);
-}; 
+// Função utilitária para verificar se uma chave de país existe
+export const isValidCountryKey = (key: string): boolean => {
+  return cnCountries.some(country => country.key === key);
+};
 
 // Função utilitária para receber a imagem da bandeira
 export const getFlagImage = (country: Country): string => {

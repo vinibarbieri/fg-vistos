@@ -11,13 +11,12 @@ import { Button } from '@/components/ui/button';
 import { ShieldCheck, Plane, FileCheck2 } from 'lucide-react';
 import { VistosImagem, EtaImagem, ConsularImagem } from '@/assets/images';
 import { cnCountries, Country } from '@/cn';
-import useCountryVisaTypes from '@/hooks/useCountryVisaTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 
 const Vistos = () => {
-  const [selectedCountryFromShowcase, setSelectedCountryFromShowcase] = useState('');
+  const [selectedCountryKeyFromShowcase, setSelectedCountryKeyFromShowcase] = useState('');
   const [selectedService, setSelectedService] = useState(0); // 0: Vistos, 1: ETA, 2: Representação
 
   const services = [
@@ -54,7 +53,7 @@ const Vistos = () => {
   const handleServiceChange = (index: number) => {
     setSelectedService(index);
   };
-
+  
   const countriesWithEta = cnCountries.filter(country => (country.eta));
   const countriesWithVisto = cnCountries.filter(country => (country.visto));
 
@@ -73,8 +72,8 @@ const Vistos = () => {
         <>
           {/* Vitrine de Destinos - apenas para Vistos */}
           <CountryShowcase 
-            onCountrySelect={(countriesWithVisto) => {
-              setSelectedCountryFromShowcase(countriesWithVisto);
+            onCountrySelect={(countryKey) => {
+              setSelectedCountryKeyFromShowcase(countryKey);
               scrollToVisaSelector();
             }}
             filteredCountries={countriesWithVisto}
@@ -83,23 +82,23 @@ const Vistos = () => {
           {/* Seção Interativa de Planos - apenas para Vistos */}
           <div id="visa-selector">
             <VisaSelector 
-              selectedCountryProp={selectedCountryFromShowcase}
+              selectedCountryProp={selectedCountryKeyFromShowcase}
               showWhatsAppButton={true}
             />
           </div>
 
           {/* FAQ Dinâmico - apenas para Vistos */}
-          <VisaFAQ selectedCountryFromSelector={selectedCountryFromShowcase} />
+          <VisaFAQ selectedCountryFromSelector={selectedCountryKeyFromShowcase} />
         </>
       )}
 
       {selectedService === 1 && (
         /* Conteúdo para Autorização Eletrônica (ETA) */
         <>
-          {/* Vitrine de Destinos - apenas para Vistos */}
+          {/* Vitrine de Destinos - apenas para ETA */}
           <CountryShowcase 
-            onCountrySelect={(countriesWithVisto) => {
-              setSelectedCountryFromShowcase(countriesWithVisto);
+            onCountrySelect={(countryKey) => {
+              setSelectedCountryKeyFromShowcase(countryKey);
               scrollToVisaSelector();
             }}
             filteredCountries={countriesWithEta}
@@ -108,13 +107,13 @@ const Vistos = () => {
           {/* Seção Interativa de Planos - apenas para ETA */}
           <div id="visa-selector">
             <VisaSelector 
-              selectedCountryProp={selectedCountryFromShowcase}
+              selectedCountryProp={selectedCountryKeyFromShowcase}
               showWhatsAppButton={true}
             />
           </div>
 
           {/* FAQ Dinâmico - apenas para ETA */}
-          <VisaFAQ selectedCountryFromSelector={selectedCountryFromShowcase} />
+          <VisaFAQ selectedCountryFromSelector={selectedCountryKeyFromShowcase} />
         </>
       )}
 
@@ -148,10 +147,15 @@ const Vistos = () => {
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             Nossa equipe especializada está pronta para ajudar você com qualquer dúvida sobre vistos.
           </p>
+          
           <Button 
             size="lg" 
             className="bg-primary hover:bg-secondary text-white px-8 py-4 text-lg"
-            onClick={() => window.open('https://wa.me/5548998231163', '_blank')}
+            onClick={() => {
+              const message = "Olá, estou precisando de uma representação consular e preciso de mais informações sobre o processo.";
+              const encodedMessage = encodeURIComponent(message);
+              window.open(`https://api.whatsapp.com/send?phone=5548998231163&text=${encodedMessage}`, '_blank');
+            }}
           >
             <FontAwesomeIcon icon={faWhatsapp} /> Fale com nossa equipe
           </Button>
