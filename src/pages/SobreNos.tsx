@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Users, Award, Heart, Globe, MessageCircle, Plane, MapPin, Clock, Shield, Star, CheckCircle, TrendingUp, Building2 } from 'lucide-react';
+import { Users, Award, Heart, Globe, MessageCircle, Plane, MapPin, Clock, Shield, Star, CheckCircle, TrendingUp, Building2, History, Target, Lightbulb, BarChart3, UserCheck, FileText, Calendar, Zap, Phone, CheckCircle2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
@@ -129,16 +129,14 @@ const SobreNos = () => {
       role: 'Fundadora & Especialista Consular',
       experience: '18+ anos de experiência',
       description: 'Mais de 18 anos de experiência em assessoria de vistos. Começou como vendedora, conhece as dores reais do cliente e faz questão de manter um atendimento próximo e humanizado.',
-      specialties: ['Vistos EUA', 'Vistos Europa', 'Assessoria Consular'],
-      avatar: '👩‍💼'
+      avatar: UserCheck
     },
     {
       name: 'Gabriel',
       role: 'Especialista em Vistos',
       experience: 'Gestão Estratégica',
       description: 'Apaixonado por viagens e atendimento ao cliente. Responsável pela gestão estratégica da FG Vistos, sempre buscando inovar para melhorar a experiência dos viajantes.',
-      specialties: ['Gestão Estratégica', 'Inovação', 'Atendimento ao Cliente'],
-      avatar: '👨‍💼'
+      avatar: UserCheck
     }
   ];
 
@@ -219,7 +217,8 @@ const SobreNos = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  📜 Nossa História
+                  <History className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                  Nossa História
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
                   Uma jornada de quase duas décadas transformando sonhos de viagem em realidade
@@ -312,7 +311,8 @@ const SobreNos = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  🌟 Nossos Diferenciais
+                  <Star className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                  Nossos Diferenciais
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
                   O que nos torna únicos no mercado de assessoria consular
@@ -354,20 +354,16 @@ const SobreNos = () => {
         <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-5xl mx-auto text-center">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-6 sm:mb-8 px-2">
+                <Globe className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                Nossa Missão
+              </h2>
               <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-8 sm:p-12 md:p-16 relative overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full -translate-y-8 translate-x-8 sm:-translate-y-16 sm:translate-x-16"></div>
                 <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-full translate-y-6 -translate-x-6 sm:translate-y-12 sm:-translate-x-12"></div>
                 
                 <div className="relative z-10">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary to-secondary rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-6 sm:mb-8">
-                    <Globe className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-                  </div>
-                  
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-6 sm:mb-8 px-2">
-                    🗺 Nossa Missão
-                  </h2>
-                  
                   <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto px-2">
                     Facilitar o acesso a viagens internacionais, oferecendo assessoria consular{' '}
                     <span className="font-semibold text-primary">confiável, humana e de qualidade</span>, 
@@ -385,7 +381,8 @@ const SobreNos = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  💡 Nossos Valores
+                  <Lightbulb className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                  Nossos Valores
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
                   Os princípios que guiam nossa atuação no mercado
@@ -429,7 +426,8 @@ const SobreNos = () => {
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="max-w-5xl mx-auto text-center text-white">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 px-2">
-                📈 Nossos Números
+                <BarChart3 className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3" />
+                Nossos Números
               </h2>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mb-8 sm:mb-12">
@@ -480,7 +478,8 @@ const SobreNos = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  👥 Quem Somos
+                  <Users className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                  Quem Somos
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
                   Conheça a equipe que faz a diferença na sua jornada
@@ -493,7 +492,7 @@ const SobreNos = () => {
                     <CardContent className="p-6 sm:p-8">
                       <div className="text-center mb-6">
                         <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary to-secondary rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                          <span className="text-3xl sm:text-4xl">{member.avatar}</span>
+                          <member.avatar className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
                         </div>
                         
                         <h3 className="text-xl sm:text-2xl font-bold text-secondary mb-2">
@@ -539,7 +538,7 @@ const SobreNos = () => {
               </div>
               
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 px-2">
-                ✈ Pronto para transformar seu sonho em realidade?
+                Pronto para transformar seu sonho em realidade?
               </h2>
               
               <p className="text-lg sm:text-xl mb-8 sm:mb-10 opacity-90 max-w-3xl mx-auto leading-relaxed px-2">
