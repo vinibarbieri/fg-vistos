@@ -229,7 +229,7 @@ const SobreNos = () => {
                 {/* Linha central */}
                 <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-primary via-secondary to-primary"></div>
                 
-                <div className="space-y-16">
+                <div>
                   {milestones.map((milestone, index) => (
                     <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                       {/* Conteúdo */}
