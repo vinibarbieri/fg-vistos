@@ -4,9 +4,10 @@ import { cnCountries, Country, getFlagImage } from '@/cn/cnCountries';
 
 interface CountryShowcaseProps {
   onCountrySelect: (country: string) => void;
+  filteredCountries?: Country[];
 }
 
-const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
+const CountryShowcase = ({ onCountrySelect, filteredCountries }: CountryShowcaseProps) => {
 
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const handleImageError = (countryCode: string) => {
@@ -15,6 +16,8 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
       [countryCode]: true,
     }));
   };
+
+  const countriesToShow = filteredCountries || cnCountries;
 
   return (
     <section className="py-16 bg-white">
@@ -29,7 +32,7 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
         </div>
 
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
-          {cnCountries.map((country) => (
+          {countriesToShow.map((country) => (
             <Card 
               key={country.name} 
               className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"

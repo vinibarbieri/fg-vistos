@@ -55,24 +55,8 @@ const Vistos = () => {
     setSelectedService(index);
   };
 
-  
-  const countryHasEta = (country: Country): boolean => {
-    const {data: countryVisasTypes} = useCountryVisaTypes({ country: country.key });
-    if (!countryVisasTypes) return false;
-
-    const countryEta = countryVisasTypes.filter(visaType => visaType.visa_type.toLowerCase() === 'eta');
-    return countryEta.length > 0
-  }
-  const countriesWithEta = cnCountries.filter(country => countryHasEta(country));
-
-  const countryHasVisto = (country: Country): boolean => {
-    const {data: countryVisasTypes} = useCountryVisaTypes({ country: country.key });
-    if (!countryVisasTypes) return false;
-
-    const countryVisto = countryVisasTypes.filter(visaType => visaType.visa_type.toLowerCase() === 'visto');
-    return countryVisto.length > 0
-  }
-  const countriesWithVisto = cnCountries.filter(country => countryHasVisto(country));
+  const countriesWithEta = cnCountries.filter(country => (country.eta));
+  const countriesWithVisto = cnCountries.filter(country => (country.visto));
 
   return (
     <div className="min-h-screen">
@@ -93,6 +77,7 @@ const Vistos = () => {
               setSelectedCountryFromShowcase(countriesWithVisto);
               scrollToVisaSelector();
             }}
+            filteredCountries={countriesWithVisto}
           />
 
           {/* Seção Interativa de Planos - apenas para Vistos */}
@@ -117,6 +102,7 @@ const Vistos = () => {
               setSelectedCountryFromShowcase(countriesWithVisto);
               scrollToVisaSelector();
             }}
+            filteredCountries={countriesWithEta}
           />
 
           {/* Seção Interativa de Planos - apenas para ETA */}

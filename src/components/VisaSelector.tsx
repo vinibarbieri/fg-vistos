@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check, Loader2, AlertCircle } from 'lucide-react';
-import { cnCountries, isValidCountry } from '@/cn/cnCountries';
+import { cnCountries, Country, isValidCountry } from '@/cn/cnCountries';
 import { useVisaPlans } from '@/hooks/useVisaPlans';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,10 +13,11 @@ import useCountryVisaTypes from '@/hooks/useCountryVisaTypes';
 interface VisaSelectorProps {
   selectedCountryProp?: string;
   showWhatsAppButton?: boolean;
+  filteredCountries?: Country[];
 }
 
 
-const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaSelectorProps) => {
+const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filteredCountries }: VisaSelectorProps) => {
   const [selectedCountry, setSelectedCountry] = useState('eua');
   const [selectedVisaType, setSelectedVisaType] = useState('visto');
 
@@ -36,6 +37,8 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
       setSelectedCountry(selectedCountryProp);
     }
   }, [selectedCountryProp]);
+
+  const countriesToShow = filteredCountries || cnCountries;
 
   // Função para formatar preço
   const formatPrice = (price: number) => {
@@ -88,7 +91,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaS
                 onChange={(e) => setSelectedCountry(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
               >
-                {cnCountries.map(country => (
+                {countriesToShow.map(country => (
                   <option key={country.key} value={country.key}>
                     {country.name}
                   </option>
