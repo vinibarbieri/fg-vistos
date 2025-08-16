@@ -26,7 +26,6 @@ const Navbar = () => {
     { name: 'Vistos', href: '/vistos' },
     { name: 'Autorização Eletrônica (ETA)', href: '/vistos' },
     { name: 'Representação Consular', href: '/vistos' },
-    { name: 'Consultoria Especializada', href: '/vistos' }
   ];
 
   const renderMenuItem = (item: MenuItem) => {

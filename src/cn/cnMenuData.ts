@@ -23,11 +23,6 @@ export const cnServicesMenu: Omit<MenuItem, 'iconName'>[] = [
     title: 'Representação Consular',
     description: 'Serviços de representação em consulados',
     url: '/vistos'
-  },
-  {
-    title: 'Consultoria Especializada',
-    description: 'Orientações personalizadas para seu processo',
-    url: '/vistos'
   }
 ];
 
@@ -68,12 +63,6 @@ export const cnMainMenu: MenuItem[] = [
     iconName: "Briefcase",
     items: cnServicesMenu
   },
-  // {
-  //   title: "Recursos",
-  //   url: "#",
-  //   iconName: "BookOpen",
-  //   items: cnResourcesMenu
-  // },
   { 
     title: "Sobre Nós", 
     url: "/sobre-nos", 
@@ -91,7 +80,6 @@ export const cnServiceIcons: Record<string, string> = {
   'Vistos': 'Globe',
   'Autorização Eletrônica (ETA)': 'CheckCircle',
   'Representação Consular': 'Shield',
-  'Consultoria Especializada': 'HelpCircle'
 };
 
 // Mapeamento de ícones para recursos
