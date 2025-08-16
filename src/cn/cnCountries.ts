@@ -8,11 +8,14 @@ export interface Country {
 export const cnCountries: Country[] = [
   { name: 'Estados Unidos', key: 'eua', flag: 'us', emoji: '🇺🇸' },
   { name: 'Canadá', key: 'can', flag: 'ca', emoji: '🇨🇦' },
+  { name: 'México', key: 'mex', flag: 'mx', emoji: '🇲🇽' },
   { name: 'Reino Unido', key: 'rei', flag: 'gb', emoji: '🇬🇧' },
-  { name: 'Portugal', key: 'por', flag: 'pt', emoji: '' },
-  { name: 'China', key: 'chi', flag: 'cn', emoji: '' },
-  { name: 'Índia', key: 'ind', flag: 'in', emoji: '' },
+  { name: 'Portugal', key: 'por', flag: 'pt', emoji: '🇵🇹' },
+  { name: 'China', key: 'chi', flag: 'cn', emoji: '🇨🇳' },
+  { name: 'Coreia do Sul', key: 'cor', flag: 'kr', emoji: '🇰🇷' },
+  { name: 'Índia', key: 'ind', flag: 'in', emoji: '🇮🇳' },
   { name: 'Austrália', key: 'aus', flag: 'au', emoji: '🇦🇺' },
+  { name: 'Nova Zelândia', key: 'nzl', flag: 'nz', emoji: '🇳🇿' },
   { name: 'Outros Destinos', key: 'out', flag: 'zz', emoji: '🌍' },
 ];
 
