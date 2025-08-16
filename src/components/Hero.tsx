@@ -64,15 +64,15 @@ const Hero = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Gradient overlay for better text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent sm:bg-gradient-to-r sm:from-black sm:via-black/80 sm:via-black/60 sm:to-transparent" style={{ background: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)' }}></div>
               
               {/* Content */}
-              <div className="relative z-10 flex flex-col justify-center h-full text-white px-8 lg:px-16 sm:ml-10">
-                <div className="max-w-2xl">
+              <div className="relative z-10 flex flex-col justify-center h-full text-white px-4 sm:px-8 lg:px-16 sm:ml-10">
+                <div className="max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-2xl">
                   <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in text-left" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
                     Seu <span className="text-primary" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>Visto Aprovado</span> com Segurança e Eficiência
                   </h1>
-                  <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in text-left" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
+                  <p className="text-xl sm:text-lg md:text-2xl mb-8 text-gray-200 animate-fade-in text-left" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
                     Consultoria especializada para sua viagem, com planos personalizados, pagamento
                     facilitado e suporte completo em todas as etapas.
                   </p>
