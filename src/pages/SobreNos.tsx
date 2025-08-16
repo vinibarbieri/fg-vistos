@@ -80,7 +80,6 @@ const SobreNos = () => {
       icon: Award,
       title: 'Compromisso Real',
       description: 'Compromisso com resultados reais, focando em soluções sob medida para cada viajante.',
-      color: 'from-yellow-500 to-yellow-600'
     },
     {
       icon: Heart,
@@ -95,7 +94,7 @@ const SobreNos = () => {
       icon: Clock,
       title: 'Atendimento 100% Contínuo',
       description: 'Acompanhamos o cliente do começo ao fim do processo, sem deixar dúvidas para trás.',
-      highlight: '24/7'
+      highlight: 'Completo'
     },
     {
       icon: Users,
@@ -216,8 +215,8 @@ const SobreNos = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  <History className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2 flex items-center justify-center">
+                  <History className="w-8 h-8 mr-3 sm:w-12 sm:h-12 sm:mr-4 text-primary" />
                   Nossa História
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
@@ -310,8 +309,8 @@ const SobreNos = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  <Star className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2 flex items-center justify-center">
+                  <Star className="w-8 h-8 mr-3 sm:w-12 sm:h-12 sm:mr-4 text-primary" />
                   Nossos Diferenciais
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
@@ -354,8 +353,8 @@ const SobreNos = () => {
         <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-5xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-6 sm:mb-8 px-2">
-                <Globe className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-6 sm:mb-8 px-2 flex items-center justify-center">
+                <Globe className="w-8 h-8 mr-3 sm:w-12 sm:h-12 sm:mr-4 text-primary" />
                 Nossa Missão
               </h2>
               <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-8 sm:p-12 md:p-16 relative overflow-hidden">
@@ -380,8 +379,8 @@ const SobreNos = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  <Lightbulb className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2 flex items-center justify-center">
+                  <Lightbulb className="w-8 h-8 mr-3 sm:w-12 sm:h-12 sm:mr-4 text-primary" />
                   Nossos Valores
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
@@ -425,8 +424,8 @@ const SobreNos = () => {
           
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="max-w-5xl mx-auto text-center text-white">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 px-2">
-                <BarChart3 className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3" />
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 px-2 flex items-center justify-center">
+                <BarChart3 className="w-8 h-8 sm:w-12 sm:h-12 mr-3 sm:mr-4" />
                 Nossos Números
               </h2>
               
@@ -459,11 +458,11 @@ const SobreNos = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/20">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 text-center">
                   <div>
-                    <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-300 mx-auto mb-2 sm:mb-3" />
+                    <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 sm:mb-3" />
                     <p className="text-base sm:text-lg">Atendemos todos os destinos desde a fundação</p>
                   </div>
                   <div>
-                    <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-300 mx-auto mb-2 sm:mb-3" />
+                    <MapPin className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2 sm:mb-3" />
                     <p className="text-base sm:text-lg">Presença consolidada em Florianópolis/SC e Santos/SP</p>
                   </div>
                 </div>
@@ -477,8 +476,8 @@ const SobreNos = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2">
-                  <Users className="inline-block w-8 h-8 sm:w-12 sm:h-12 mr-3 text-primary" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-4 sm:mb-6 px-2 flex items-center justify-center">
+                  <Users className="w-8 h-8 mr-3 sm:w-12 sm:h-12 sm:mr-4 text-primary" />
                   Quem Somos
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
