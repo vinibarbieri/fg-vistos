@@ -10,6 +10,10 @@ import { Features } from '@/components/ui/features';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, Plane, FileCheck2 } from 'lucide-react';
 import { VistosImagem, EtaImagem, ConsularImagem } from '@/assets/images';
+import { cnCountries, Country } from '@/cn';
+import useCountryVisaTypes from '@/hooks/useCountryVisaTypes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 
 const Vistos = () => {
@@ -51,6 +55,25 @@ const Vistos = () => {
     setSelectedService(index);
   };
 
+  
+  const countryHasEta = (country: Country): boolean => {
+    const {data: countryVisasTypes} = useCountryVisaTypes({ country: country.key });
+    if (!countryVisasTypes) return false;
+
+    const countryEta = countryVisasTypes.filter(visaType => visaType.visa_type.toLowerCase() === 'eta');
+    return countryEta.length > 0
+  }
+  const countriesWithEta = cnCountries.filter(country => countryHasEta(country));
+
+  const countryHasVisto = (country: Country): boolean => {
+    const {data: countryVisasTypes} = useCountryVisaTypes({ country: country.key });
+    if (!countryVisasTypes) return false;
+
+    const countryVisto = countryVisasTypes.filter(visaType => visaType.visa_type.toLowerCase() === 'visto');
+    return countryVisto.length > 0
+  }
+  const countriesWithVisto = cnCountries.filter(country => countryHasVisto(country));
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -66,8 +89,8 @@ const Vistos = () => {
         <>
           {/* Vitrine de Destinos - apenas para Vistos */}
           <CountryShowcase 
-            onCountrySelect={(country) => {
-              setSelectedCountryFromShowcase(country);
+            onCountrySelect={(countriesWithVisto) => {
+              setSelectedCountryFromShowcase(countriesWithVisto);
               scrollToVisaSelector();
             }}
           />
@@ -87,28 +110,31 @@ const Vistos = () => {
 
       {selectedService === 1 && (
         /* Conteúdo para Autorização Eletrônica (ETA) */
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-secondary mb-6">
-              Autorização Eletrônica (ETA)
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
-              Simplificamos o processo de obtenção de autorização eletrônica para países como Canadá, Reino Unido e outros destinos que exigem este documento.
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-secondary text-white px-8 py-4 text-lg"
-              onClick={() => window.open('https://wa.me/5548998231163', '_blank')}
-            >
-              Solicitar ETA
-            </Button>
+        <>
+          {/* Vitrine de Destinos - apenas para Vistos */}
+          <CountryShowcase 
+            onCountrySelect={(countriesWithVisto) => {
+              setSelectedCountryFromShowcase(countriesWithVisto);
+              scrollToVisaSelector();
+            }}
+          />
+
+          {/* Seção Interativa de Planos - apenas para ETA */}
+          <div id="visa-selector">
+            <VisaSelector 
+              selectedCountryProp={selectedCountryFromShowcase}
+              showWhatsAppButton={true}
+            />
           </div>
-        </section>
+
+          {/* FAQ Dinâmico - apenas para ETA */}
+          <VisaFAQ selectedCountryFromSelector={selectedCountryFromShowcase} />
+        </>
       )}
 
       {selectedService === 2 && (
         /* Conteúdo para Representação Consular */
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold text-secondary mb-6">
               Representação Consular
@@ -141,7 +167,7 @@ const Vistos = () => {
             className="bg-primary hover:bg-secondary text-white px-8 py-4 text-lg"
             onClick={() => window.open('https://wa.me/5548998231163', '_blank')}
           >
-            Fale com nossa equipe
+            <FontAwesomeIcon icon={faWhatsapp} /> Fale com nossa equipe
           </Button>
         </div>
       </section>

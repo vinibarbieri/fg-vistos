@@ -28,7 +28,7 @@ const CountryShowcase = ({ onCountrySelect }: CountryShowcaseProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-7 gap-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
           {cnCountries.map((country) => (
             <Card 
               key={country.name} 

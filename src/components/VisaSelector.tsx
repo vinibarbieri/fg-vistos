@@ -9,22 +9,20 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useCountryVisaTypes from '@/hooks/useCountryVisaTypes';
 
+
 interface VisaSelectorProps {
   selectedCountryProp?: string;
   showWhatsAppButton?: boolean;
 }
 
-// b1, eta
 
 const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false }: VisaSelectorProps) => {
   const [selectedCountry, setSelectedCountry] = useState('eua');
   const [selectedVisaType, setSelectedVisaType] = useState('visto');
 
-  const { data: visaTypes, isLoading: isLoadingVisaTypes, isError: isVisaTypesError, error: visaTypesError } = useCountryVisaTypes({
+  const { data: visaTypes, isLoading: isLoadingVisaTypes, isError: isVisaTypesError } = useCountryVisaTypes({
     country: selectedCountry
   });
-
-  console.log('Selected visa:', selectedVisaType);
 
   // Buscar planos do Supabase
   const { plans, isLoading: isLoadingPlans, isError: isPlansError, error: plansError } = useVisaPlans({ 
