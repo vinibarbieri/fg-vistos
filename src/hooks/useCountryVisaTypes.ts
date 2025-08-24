@@ -1,5 +1,4 @@
 import { supabase } from "@/lib/supabase";
-import { PlansT } from "@/types/PlansT";
 import { VisaTypesT } from "@/types/VisaTypesT";
 import { useQuery } from "@tanstack/react-query";
 
@@ -19,7 +18,7 @@ export const useCountryVisaTypes = ({ country }: { country: string }) => {
             const { data, error } = await supabase
                 .from('visa_types')
                 .select('*')
-                .eq('country', country)
+                .eq('country_key', country)
                 .eq('active', true);
 
             if (error && error.code !== 'PGRST116') {

@@ -48,7 +48,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
 
   // Função para formatar preço
   const formatPrice = (price: number) => {
-    return `R$ ${price.toLocaleString('pt-BR')}`;
+    return `R$ ${price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   };
 
   // Renderizar erro
@@ -107,7 +107,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Visto</label>
-              <select 
+              <select
                 value={selectedVisaType}
                 onChange={(e) => setSelectedVisaType(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
@@ -122,11 +122,8 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                   </option>
                 ) : (
                   <>
-                    <option value="Selecione um tipo de visto">
-                      Selecione um tipo de visto
-                    </option>
                     {visaTypes?.map(visa => (
-                      <option key={visa.name} value={visa.name}>{visa.name}</option>
+                      <option key={visa.visa_type} value={visa.visa_type}>{visa.name}</option>
                     ))}
                   </>
                 )}
@@ -144,23 +141,25 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
           {plans && plans.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {plans.map((plan, index) => (
-                <Card key={plan.id} className={`relative ${index === 1 ? 'border-primary border-2 transform scale-105' : ''}`}>
+                <Card key={plan.id} className={`relative flex flex-col ${index === 1 ? 'border-primary border-2 transform scale-105' : ''}`}>
                   <CardHeader className="text-center">
                     <CardTitle className="text-xl text-secondary">{plan.plan_name}</CardTitle>
                     <div className="text-3xl font-bold text-primary">{formatPrice(plan.price)}</div>
                     <p className="text-sm text-gray-500 mt-2">* Valor não inclui taxa consular</p>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex flex-col flex-1">
                     <ul className="space-y-3 mb-6">
-                      {plan.description && (
-                        <li className="flex items-start">
-                          <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700">{plan.description}</span>
-                        </li>
+                      {plan.description && plan.description.length > 0 && (
+                        plan.description.map((topic, topicIndex) => (
+                          <li key={topicIndex} className="flex items-start">
+                            <Check className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700">{topic}</span>
+                          </li>
+                        ))
                       )}
                     </ul>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-3 mt-auto">
                       <Link to="/checkout">
                         <Button 
                           className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-secondary hover:bg-secondary/90'}`}
