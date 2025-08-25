@@ -160,7 +160,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                     </ul>
                     
                     <div className="space-y-3 mt-auto">
-                      <Link to="/checkout">
+                      <Link to={`/cadastro?planId=${plan.id}`}>
                         <Button 
                           className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-secondary hover:bg-secondary/90'}`}
                         >
