@@ -40,4 +40,6 @@ export const useUserRegistration = () => {
         console.error('Erro no cadastro:', error);
       }
     };
+
+    return { handleSubmit };
   };

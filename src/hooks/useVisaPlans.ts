@@ -32,10 +32,10 @@ const fetchPlans = async (visa_type_id: string | null): Promise<PlansT[]> => {
  * @param params - Objeto contendo o país e tipo de visto
  * @returns Objeto contendo os planos, estado de carregamento e possíveis erros
  */
-export const useVisaPlans = (params: {country: string, visa_type: string}) => {
+export const useVisaPlans = (params: {country_key: string, visa_type: string}) => {
     // Usar o hook existente para buscar os tipos de visto do país
     const { data: visaTypes, isLoading: isLoadingVisaTypes } = useCountryVisaTypes({ 
-        country: params.country 
+        country_key: params.country_key 
     });
 
     // Encontrar o tipo de visto específico

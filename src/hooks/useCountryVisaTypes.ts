@@ -7,18 +7,18 @@ import { useQuery } from "@tanstack/react-query";
  * @param country - País associado ao tipo de visto
  * @returns Array completo dos tipos de vistos
  */
-export const useCountryVisaTypes = ({ country }: { country: string }) => {
+export const useCountryVisaTypes = ({ country_key }: { country_key: string }) => {
     return useQuery<VisaTypesT[], Error>({
-        queryKey: ['visa-types', country],
+        queryKey: ['visa-types', country_key],
         queryFn: async (): Promise<VisaTypesT[]> => {
-            if (!country) {
+            if (!country_key) {
                 return [];
             }
 
             const { data, error } = await supabase
                 .from('visa_types')
                 .select('*')
-                .eq('country_key', country)
+                .eq('country_key', country_key)
                 .eq('active', true);
 
             if (error && error.code !== 'PGRST116') {
@@ -28,7 +28,7 @@ export const useCountryVisaTypes = ({ country }: { country: string }) => {
             // Retorna o array completo dos tipos de visto
             return data as VisaTypesT[] || [];
         },
-        enabled: !!country,
+        enabled: !!country_key,
     });
 };
 

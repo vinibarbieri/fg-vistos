@@ -22,12 +22,12 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
   const [selectedVisaType, setSelectedVisaType] = useState('visto');
 
   const { data: visaTypes, isLoading: isLoadingVisaTypes, isError: isVisaTypesError } = useCountryVisaTypes({
-    country: selectedCountry
+    country_key: selectedCountry
   });
 
   // Buscar planos do Supabase
   const { plans, isLoading: isLoadingPlans, isError: isPlansError, error: plansError } = useVisaPlans({ 
-    country: selectedCountry, 
+    country_key: selectedCountry, 
     visa_type: selectedVisaType 
   });
 
@@ -160,7 +160,7 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                     </ul>
                     
                     <div className="space-y-3 mt-auto">
-                      <Link to={`/cadastro?planId=${plan.id}`}>
+                      <Link to={`/user-registration?planId=${plan.id}`}>
                         <Button 
                           className={`w-full ${index === 1 ? 'bg-primary hover:bg-primary/90' : 'bg-secondary hover:bg-secondary/90'}`}
                         >

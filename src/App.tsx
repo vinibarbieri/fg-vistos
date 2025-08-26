@@ -9,6 +9,8 @@ import Vistos from "./pages/Vistos";
 import SobreNos from "./pages/SobreNos";
 import Contato from "./pages/Contato";
 import NotFound from "./pages/NotFound";
+import { Checkout } from "./components/Checkout";
+import { UserRegistration } from "./components/UserRegistration";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +27,9 @@ const App = () => (
           <Route path="/vistos" element={<Vistos />} />
           <Route path="/sobre-nos" element={<SobreNos />} />
           <Route path="/contato" element={<Contato />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/user-registration" element={<UserRegistration />} />
+          <Route path="/checkout" element={<Checkout />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
