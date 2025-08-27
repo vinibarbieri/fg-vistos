@@ -54,9 +54,10 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
         },
         items: [
           {
+            name: `${orderData.plans.plan_name} - ${orderData.plans.visas.name}-${orderData.plans.visas.country}`,
             quantity: orderData.applicants_quantity,
             price: infinitePayService.convertToCents(parseFloat(orderData.plans.price)),
-            description: `Plano ${orderData.plans.plan_name} - ${orderData.plans.visa.name} - ${orderData.plans.visa.country_key}`,
+            description: `Plano ${orderData.plans.plan_name} para o ${orderData.plans.visas.name} de ${orderData.plans.visas.country}`,
           },
         ],
       };
@@ -64,19 +65,26 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
       // Criar link de checkout
       const response = await infinitePayService.createCheckoutLink(checkoutData);
       
+      // Extrair a URL do checkout da resposta
+      const checkoutUrl = response.data?.url;
+      
+      if (!checkoutUrl) {
+        throw new Error('URL de checkout não encontrada na resposta');
+      }
+      
       // Atualizar status da order para "checkout_created" via backend
       await checkoutApi.updatePaymentStatus(orderId, {
         payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.CHECKOUT_CREATED,
         payment_details: {
           ...orderData.payment_details,
-          checkout_url: response.url,
+          checkout_url: checkoutUrl,
           created_at: new Date().toISOString(),
           handle: INFINITEPAY_CONFIG.HANDLE,
         }
       });
 
       // Redirecionar para o checkout do InfinitePay
-      window.location.href = response.url;
+      window.location.href = checkoutUrl;
 
     } catch (error) {
       console.error('Erro ao criar checkout:', error);

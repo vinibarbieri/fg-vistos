@@ -7,6 +7,7 @@ import visasRouter from './routes/visas';
 import plansRouter from './routes/plans';
 import registerRouter from './routes/register';
 import checkoutRouter from './routes/checkout';
+import infinitepayRouter from './routes/infinitepay';
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -43,6 +44,7 @@ app.use('/api/visas', visasRouter);
 app.use('/api/plans', plansRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/checkout', checkoutRouter);
+app.use('/api/infinitepay', infinitepayRouter);
 
 // Middleware de tratamento de erros
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

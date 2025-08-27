@@ -2,6 +2,7 @@
 import { INFINITEPAY_CONFIG, validateInfinitePayConfig } from '@/services/infinitePay_config';
 
 export interface InfinitePayItem {
+  name: string;
   quantity: number;
   price: number; // Preço em centavos
   description: string;
@@ -30,7 +31,10 @@ export interface CreateCheckoutLinkRequest {
 }
 
 export interface CreateCheckoutLinkResponse {
-  url: string;
+  success: boolean;
+  data: {
+    url: string;
+  };
 }
 
 export interface PaymentCheckRequest {
