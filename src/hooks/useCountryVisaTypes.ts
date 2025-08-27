@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/services/supabase";
 import { VisaTypesT } from "@/types/VisaTypesT";
 import { useQuery } from "@tanstack/react-query";
 

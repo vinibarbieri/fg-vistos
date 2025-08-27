@@ -1,11 +1,12 @@
 // src/hooks/useUserRegistration.ts
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/services/supabase";
 import { ProfileT } from "@/types/ProfilesT";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export interface UserRegistrationData extends ProfileT {
   password: string;
+  quantity: number;
 }
 
 export const useUserRegistration = () => {
@@ -61,7 +62,7 @@ export const useUserRegistration = () => {
           .insert([{
             responsible_user_id: profile.id,
             plan_id: planId,
-            applicants_quantity: 1,
+            applicants_quantity: userData.quantity,
             payment_status: 'pending',
             payment_details: {
               plan_name: searchParams.get('planName'),

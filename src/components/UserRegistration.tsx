@@ -14,7 +14,8 @@ export const UserRegistration = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    quantity: 1
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +43,13 @@ export const UserRegistration = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="space-y-4">
+            <Input
+              type="number"
+              placeholder="Quantas pessoas?"
+              value={formData.quantity}
+              onChange={(e) => setFormData({...formData, quantity: Number(e.target.value)})}
+              required
+            />
             <Input
               placeholder="Nome completo"
               value={formData.name}
