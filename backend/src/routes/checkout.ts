@@ -27,8 +27,12 @@ router.get('/order/:orderId', async (req, res) => {
       .select(`
         *,
         profiles (id, name, email),
-        plans (id, plan_name, price),
-        visas (name, country)
+        plans (
+          id, 
+          plan_name, 
+          price,
+          visas (name, country)
+        )
       `)
       .eq('id', orderId)
       .single();
