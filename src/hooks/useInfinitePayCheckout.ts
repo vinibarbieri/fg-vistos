@@ -23,7 +23,7 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
           *,
           profiles (id, name, email),
           plans (id, plan_name, price),
-          visa_types (name, country)
+          visas (name, country)
         `)
         .eq('id', orderId)
         .single();
@@ -67,7 +67,7 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
           {
             quantity: orderData.applicants_quantity,
             price: infinitePayService.convertToCents(parseFloat(orderData.plans.price)),
-            description: `Plano ${orderData.plans.plan_name} - ${orderData.visa_types.name} - ${orderData.visa_types.country}`,
+            description: `Plano ${orderData.plans.plan_name} - ${orderData.plans.visa.name} - ${orderData.plans.visa.country_key}`,
           },
         ],
       };

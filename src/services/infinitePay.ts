@@ -87,6 +87,8 @@ class InfinitePayService {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'User-Agent': 'FG-Vistos/1.0',
         },
         body: JSON.stringify({
           ...data,
@@ -96,6 +98,12 @@ class InfinitePayService {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        
+        // Tratamento específico para erros CORS
+        if (response.status === 0 || response.statusText === '') {
+          throw new Error('Erro de CORS: A API não permite requisições deste domínio. Verifique a configuração do proxy.');
+        }
+        
         throw new Error(
           `${INFINITEPAY_CONFIG.ERROR_MESSAGES.NETWORK_ERROR}: ${response.status} ${response.statusText} - ${errorData.message || 'Erro desconhecido'}`
         );
@@ -104,6 +112,12 @@ class InfinitePayService {
       return response.json();
     } catch (error) {
       console.error('Erro ao criar link de checkout:', error);
+      
+      // Tratamento específico para erros de rede/CORS
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        throw new Error('Erro de conexão: Verifique se o servidor está rodando e se a configuração do proxy está correta.');
+      }
+      
       throw error;
     }
   }
