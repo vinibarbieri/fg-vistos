@@ -43,8 +43,8 @@ export const useUserRegistration = () => {
             id: authData.user?.id, // Usar o ID do usuário autenticado
             email: userData.email,
             name: userData.name,
-            account_status: 'active',
-            role: 'customer'
+            account_status: 'true',
+            role: 'Cliente'
           }])
           .select()
           .single();
