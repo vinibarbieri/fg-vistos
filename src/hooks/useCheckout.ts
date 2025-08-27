@@ -1,29 +1,22 @@
-import { supabase } from "@/lib/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
+import { checkoutApi } from "@/services/api";
 
 export const useCheckout = () => {
     const [searchParams] = useSearchParams();
     const orderId = searchParams.get('orderId');
     
-    // Buscar dados completos da order
-    const { data: orderData } = useQuery({
+    // Buscar dados completos da order via backend
+    const { data: orderData, isLoading, error } = useQuery({
       queryKey: ['order', orderId],
       queryFn: async () => {
-        const { data, error } = await supabase
-          .from('orders')
-          .select(`
-            *,
-            profiles (id, name),
-            plans (id, plan_name, price)
-          `)
-          .eq('id', orderId)
-          .single();
+        if (!orderId) return null;
         
-        if (error) throw error;
-        return data;
-      }
+        const response = await checkoutApi.getOrder(orderId);
+        return response.data;
+      },
+      enabled: !!orderId,
     });
 
-    return { orderData };
+    return { orderData, isLoading, error };
 };

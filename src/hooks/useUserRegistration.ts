@@ -1,43 +1,49 @@
-import { supabase } from "@/lib/supabase";
+// src/hooks/useUserRegistration.ts
 import { ProfileT } from "@/types/ProfilesT";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { authApi } from "@/services/api";
+
+export interface UserRegistrationData extends ProfileT {
+  password: string;
+  quantity: number;
+}
 
 export const useUserRegistration = () => {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const planId = searchParams.get('planId');
     
-    const handleSubmit = async (userData: ProfileT) => {
+    const handleSubmit = async (userData: UserRegistrationData) => {
       try {
-        // 1. Criar profile
-        const { data: profile, error: profileError } = await supabase
-          .from('profiles')
-          .insert([{
-            email: userData.email,
-            name: userData.name,
-          }])
-          .select()
-          .single();
+        console.log('Iniciando cadastro...', { userData, planId });
         
-        if (profileError) throw profileError;
-        
-        // 2. Criar order vinculada ao profile e plano
-        const { data: order, error: orderError } = await supabase
-          .from('orders')
-          .insert([{
-            responsible_user_id: profile.id,
-            plan_id: planId,
-            payment_status: 'pending',
-          }])
-          .select()
-          .single();
-        
-        if (orderError) throw orderError;
+        // Preparar dados para o backend
+        const registrationData = {
+          name: userData.name,
+          email: userData.email,
+          password: userData.password,
+          quantity: userData.quantity,
+          planId: planId || ''
+        };
 
-        // 3. Redirecionar para checkout com orderId
-        window.location.href = `/checkout?orderId=${order.id}`;
+        // Chamar o backend para registrar o usuário
+        const response = await authApi.register(registrationData);
+        
+        if (response.success) {
+          console.log('Usuário registrado com sucesso:', response.data);
+          
+          // Redirecionar para checkout com orderId
+          navigate(`/checkout?orderId=${response.data.order.id}`);
+        } else {
+          throw new Error(response.error || 'Erro ao registrar usuário');
+        }
 
       } catch (error) {
         console.error('Erro no cadastro:', error);
+        throw error; // Re-throw para o componente tratar
       }
     };
-  };
+
+    return { handleSubmit };
+};
