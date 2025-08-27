@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { infinitePayService, CreateCheckoutLinkRequest, PaymentCheckRequest } from '@/services/infinitePay';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/services/supabase';
+import { checkoutApi } from '@/services/api';
 import { INFINITEPAY_CONFIG } from '@/services/infinitePay_config';
 
 export const useInfinitePayCheckout = (orderId: string | null) => {
@@ -11,25 +11,14 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Buscar dados da order
+  // Buscar dados da order via backend
   const { data: orderData, isLoading: isLoadingOrder } = useQuery({
     queryKey: ['order', orderId],
     queryFn: async () => {
       if (!orderId) return null;
       
-      const { data, error } = await supabase
-        .from('orders')
-        .select(`
-          *,
-          profiles (id, name, email),
-          plans (id, plan_name, price),
-          visas (name, country)
-        `)
-        .eq('id', orderId)
-        .single();
-      
-      if (error) throw error;
-      return data;
+      const response = await checkoutApi.getOrder(orderId);
+      return response.data;
     },
     enabled: !!orderId,
   });
@@ -75,19 +64,16 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
       // Criar link de checkout
       const response = await infinitePayService.createCheckoutLink(checkoutData);
       
-      // Atualizar status da order para "checkout_created"
-      await supabase
-        .from('orders')
-        .update({ 
-          payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.CHECKOUT_CREATED,
-          payment_details: {
-            ...orderData.payment_details,
-            checkout_url: response.url,
-            created_at: new Date().toISOString(),
-            handle: INFINITEPAY_CONFIG.HANDLE,
-          }
-        })
-        .eq('id', orderId);
+      // Atualizar status da order para "checkout_created" via backend
+      await checkoutApi.updatePaymentStatus(orderId, {
+        payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.CHECKOUT_CREATED,
+        payment_details: {
+          ...orderData.payment_details,
+          checkout_url: response.url,
+          created_at: new Date().toISOString(),
+          handle: INFINITEPAY_CONFIG.HANDLE,
+        }
+      });
 
       // Redirecionar para o checkout do InfinitePay
       window.location.href = response.url;
@@ -116,38 +102,32 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
 
       const response = await infinitePayService.checkPaymentStatus(data);
       
-      // Atualizar status da order baseado na resposta
+      // Atualizar status da order baseado na resposta via backend
       if (response.success && response.paid) {
-        await supabase
-          .from('orders')
-          .update({ 
-            payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.PAID,
-            payment_details: {
-              ...orderData?.payment_details,
-              transaction_nsu: transactionNsu,
-              slug: slug,
-              paid_amount: infinitePayService.convertFromCents(response.paid_amount),
-              capture_method: response.capture_method,
-              paid_at: new Date().toISOString(),
-              installments: response.installments,
-            }
-          })
-          .eq('id', orderId);
+        await checkoutApi.updatePaymentStatus(orderId, {
+          payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.PAID,
+          payment_details: {
+            ...orderData?.payment_details,
+            transaction_nsu: transactionNsu,
+            slug: slug,
+            paid_amount: infinitePayService.convertFromCents(response.paid_amount),
+            capture_method: response.capture_method,
+            paid_at: new Date().toISOString(),
+            installments: response.installments,
+          }
+        });
       } else {
         // Pagamento não foi aprovado
-        await supabase
-          .from('orders')
-          .update({ 
-            payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.FAILED,
-            payment_details: {
-              ...orderData?.payment_details,
-              transaction_nsu: transactionNsu,
-              slug: slug,
-              failed_at: new Date().toISOString(),
-              failure_reason: 'Pagamento não foi aprovado pelo InfinitePay',
-            }
-          })
-          .eq('id', orderId);
+        await checkoutApi.updatePaymentStatus(orderId, {
+          payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.FAILED,
+          payment_details: {
+            ...orderData?.payment_details,
+            transaction_nsu: transactionNsu,
+            slug: slug,
+            failed_at: new Date().toISOString(),
+            failure_reason: 'Pagamento não foi aprovado pelo InfinitePay',
+          }
+        });
       }
 
       return response;
@@ -172,22 +152,19 @@ export const useInfinitePayCheckout = (orderId: string | null) => {
         const paymentStatus = await checkPaymentStatus(transactionNsu, slug);
         
         if (paymentStatus?.success && paymentStatus.paid) {
-          // Atualizar order com dados do pagamento
-          await supabase
-            .from('orders')
-            .update({ 
-              payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.PAID,
-              payment_details: {
-                ...orderData?.payment_details,
-                transaction_nsu: transactionNsu,
-                slug: slug,
-                receipt_url: receiptUrl,
-                capture_method: captureMethod,
-                paid_at: new Date().toISOString(),
-                installments: paymentStatus.installments,
-              }
-            })
-            .eq('id', orderId);
+          // Atualizar order com dados do pagamento via backend
+          await checkoutApi.updatePaymentStatus(orderId, {
+            payment_status: INFINITEPAY_CONFIG.PAYMENT_STATUS.PAID,
+            payment_details: {
+              ...orderData?.payment_details,
+              transaction_nsu: transactionNsu,
+              slug: slug,
+              receipt_url: receiptUrl,
+              capture_method: captureMethod,
+              paid_at: new Date().toISOString(),
+              installments: paymentStatus.installments,
+            }
+          });
 
           // Redirecionar para página de sucesso
           navigate(`${INFINITEPAY_CONFIG.REDIRECT_URLS.SUCCESS}?orderId=${orderId}&status=paid`);

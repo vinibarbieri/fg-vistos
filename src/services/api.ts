@@ -1,5 +1,5 @@
 // Configuração da API
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 
 // Classe para gerenciar requisições HTTP
 class ApiService {
@@ -151,11 +151,29 @@ export const paymentsApi = {
 export const authApi = {
   // Registrar novo usuário
   register: (data: any) => 
-    apiService.post<any>('/api/auth/register', data),
+    apiService.post<any>('/api/register', data),
   
   // Verificar se email já existe
   checkEmail: (data: any) => 
-    apiService.post<any>('/api/auth/check-email', data),
+    apiService.post<any>('/api/register/check-email', data),
+};
+
+export const checkoutApi = {
+  // Buscar dados da order
+  getOrder: (orderId: string) => 
+    apiService.get<any>(`/api/checkout/order/${orderId}`),
+  
+  // Atualizar status de pagamento
+  updatePaymentStatus: (orderId: string, data: any) => 
+    apiService.put<any>(`/api/checkout/order/${orderId}/payment-status`, data),
+  
+  // Verificar status de pagamento
+  checkPayment: (data: any) => 
+    apiService.post<any>('/api/checkout/payment/check', data),
+  
+  // Processar retorno do pagamento
+  processPaymentReturn: (data: any) => 
+    apiService.post<any>('/api/checkout/payment/return', data),
 };
 
 export default apiService;
