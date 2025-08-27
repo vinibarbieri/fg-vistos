@@ -1,4 +1,4 @@
-import { VisaTypesT } from "./VisaTypesT";
+import { VisasT } from "./VisasT";
 
 /***
  * @description Tipagem para os planos
@@ -7,7 +7,7 @@ import { VisaTypesT } from "./VisaTypesT";
  * @prop description - Descrição do plano
  * @prop price - Preço do plano
  * @prop active - Indica se o plano está ativo
- * @prop visa_type_id - Identificador do tipo de visto associado ao plano
+ * @prop visa_id - Identificador do tipo de visto associado ao plano
  */
 export type PlansT = {
     id: string;
@@ -15,5 +15,5 @@ export type PlansT = {
     description: string[];
     price: number;
     active: boolean;
-    visa_type_id: VisaTypesT["id"];
+    visa_id: VisasT["id"];
 };
