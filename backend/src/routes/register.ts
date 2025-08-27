@@ -14,7 +14,7 @@ const userRegistrationSchema = z.object({
 });
 
 // Registrar novo usuário
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     // Validar dados de entrada
     const validatedData = userRegistrationSchema.parse(req.body);
