@@ -7,7 +7,7 @@
  * @prop active - Indica se o tipo de visto está ativo
  * @prop country_key - Chave do país associado ao tipo de visto
  */
-export type VisaTypesT = {
+export type VisasT = {
     id: string;
     name: string;
     visa_type: string;

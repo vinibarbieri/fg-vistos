@@ -5,16 +5,16 @@ import { apiService } from "@/services/api";
 
 /**
  * @description Hook para buscar os planos via backend
- * @param visa_type_id - ID do tipo de visto
+ * @param visa_id - ID do tipo de visto
  * @returns Promise que resolve com os planos
  */
-const fetchPlans = async (visa_type_id: string | null): Promise<PlansT[]> => {
-    if (!visa_type_id) {
+const fetchPlans = async (visa_id: string | null): Promise<PlansT[]> => {
+    if (!visa_id) {
         return [];
     }
 
     try {
-        const response = await apiService.get<{ success: boolean; data: PlansT[] }>(`/api/plans?visa_type_id=${visa_type_id}`);
+        const response = await apiService.get<{ success: boolean; data: PlansT[] }>(`/api/plans?visa_id=${visa_id}`);
         return response.data || [];
     } catch (error) {
         console.error('Erro ao buscar planos:', error);
@@ -35,7 +35,7 @@ export const useVisaPlans = (params: {country_key: string, visa_type: string}) =
 
     // Encontrar o tipo de visto específico
     const targetVisaType = visaTypes?.find(
-        visaType => visaType.visa_type === params.visa_type
+        visa => visa.visa_type === params.visa_type
     );
 
     // Query para buscar os planos usando o visa_type_id encontrado

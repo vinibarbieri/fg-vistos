@@ -3,22 +3,22 @@ import { supabase } from '../config/database';
 
 const router = Router();
 
-// Listar planos por tipo de visto (não precisa de autenticação para leitura)
+// Listar planos por tipo de visto
 router.get('/', async (req, res) => {
   try {
-    const { visa_type_id } = req.query;
+    const { visa_id } = req.query;
     
-    if (!visa_type_id) {
+    if (!visa_id) {
       return res.status(400).json({
         success: false,
-        error: 'visa_type_id é obrigatório'
+        error: 'visa_id é obrigatório'
       });
     }
 
     const { data, error } = await supabase
       .from('plans')
       .select('*')
-      .eq('visa_type_id', visa_type_id)
+      .eq('visa_id', visa_id)
       .eq('active', true)
       .order('price', { ascending: true });
 
