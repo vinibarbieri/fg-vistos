@@ -48,14 +48,22 @@ export const Checkout = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-6 w-6 text-blue-600" />
-            Checkout - {orderData.plans.plan_name}
+            Checkout
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Resumo do Plano */}
           <div className="border-b pb-4">
-            <h3 className="font-semibold mb-3 text-lg">Resumo do Plano</h3>
+            <h3 className="font-semibold mb-3 text-lg">Resumo do Pedido</h3>
             <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>País:</span>
+                <span className="font-medium">{orderData.plans.visas.country}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Visto:</span>
+                <span className="font-medium">{orderData.plans.visas.name}</span>
+              </div>
               <div className="flex justify-between">
                 <span>Plano:</span>
                 <span className="font-medium">{orderData.plans.plan_name}</span>

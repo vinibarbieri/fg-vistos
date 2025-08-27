@@ -1,34 +1,29 @@
-import { supabase } from "@/services/supabase";
 import { PlansT } from "@/types/PlansT";
 import { useQuery } from "@tanstack/react-query";
 import { useCountryVisaTypes } from "./useCountryVisaTypes";
+import { apiService } from "@/services/api";
 
 /**
- * @description Hook para buscar os planos dado um visaTypeId
- * @param visa_type_id - ID do tipo de visto
+ * @description Hook para buscar os planos via backend
+ * @param visa_id - ID do tipo de visto
  * @returns Promise que resolve com os planos
  */
-const fetchPlans = async (visa_type_id: string | null): Promise<PlansT[]> => {
-    if (!visa_type_id) {
+const fetchPlans = async (visa_id: string | null): Promise<PlansT[]> => {
+    if (!visa_id) {
         return [];
     }
 
-    const { data, error } = await supabase
-        .from('plans')
-        .select('*')
-        .eq('visa_type_id', visa_type_id)
-        .eq('active', true)
-        .order('price', { ascending: true });
-
-    if (error) {
-        throw new Error(`Erro ao buscar planos: ${error.message}`);
+    try {
+        const response = await apiService.get<{ success: boolean; data: PlansT[] }>(`/api/plans?visa_id=${visa_id}`);
+        return response.data || [];
+    } catch (error) {
+        console.error('Erro ao buscar planos:', error);
+        throw new Error(`Erro ao buscar planos: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
     }
-
-    return data as PlansT[];
 }
 
 /***
- * @description Hook principal para buscar planos de visto
+ * @description Hook principal para buscar planos de visto via backend
  * @param params - Objeto contendo o país e tipo de visto
  * @returns Objeto contendo os planos, estado de carregamento e possíveis erros
  */
@@ -40,7 +35,7 @@ export const useVisaPlans = (params: {country_key: string, visa_type: string}) =
 
     // Encontrar o tipo de visto específico
     const targetVisaType = visaTypes?.find(
-        visaType => visaType.visa_type === params.visa_type
+        visa => visa.visa_type === params.visa_type
     );
 
     // Query para buscar os planos usando o visa_type_id encontrado

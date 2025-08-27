@@ -1,11 +1,27 @@
 // src/config/infinitePay.ts
 
+// Configuração base para diferentes ambientes
+const getApiBaseUrl = () => {
+  if (import.meta.env.DEV) {
+    // Em desenvolvimento, usa proxy local para evitar CORS
+    return '/api/infinitepay';
+  }
+  
+  if (import.meta.env.MODE === 'staging') {
+    // Em staging, pode usar uma URL diferente
+    return 'https://api.infinitepay.io';
+  }
+  
+  // Em produção, usa a URL oficial
+  return 'https://api.infinitepay.io';
+};
+
 export const INFINITEPAY_CONFIG = {
   // Handle do InfinitePay (sua identificação única)
   HANDLE: import.meta.env.VITE_INFINITEPAY_HANDLE || 'seu_handle_aqui',
   
-  // URLs da API
-  API_BASE_URL: 'https://api.infinitepay.io',
+  // URLs da API - Configuração dinâmica baseada no ambiente
+  API_BASE_URL: getApiBaseUrl(),
   
   // Endpoints
   ENDPOINTS: {
@@ -29,7 +45,7 @@ export const INFINITEPAY_CONFIG = {
   // Configurações de pagamento
   PAYMENT: {
     CURRENCY: 'BRL',
-    MIN_AMOUNT: 300000, // R$ 300 em centavos
+    MIN_AMOUNT: 30000, // R$ 300 em centavos
     MAX_AMOUNT: 1000000, // R$ 10.000,00 em centavos
   },
   
@@ -55,12 +71,20 @@ export const INFINITEPAY_CONFIG = {
     INVALID_DATA: 'Dados inválidos para criar o checkout.',
     PAYMENT_FAILED: 'Pagamento não foi aprovado. Tente novamente.',
     ORDER_NOT_FOUND: 'Pedido não encontrado.',
+    CORS_ERROR: 'Erro de CORS detectado. Verifique a configuração do proxy.',
   },
   
   // Configurações de retry
   RETRY: {
     MAX_ATTEMPTS: 3,
     DELAY: 1000, // 1 segundo
+  },
+  
+  // Configurações de ambiente
+  ENV: {
+    IS_DEV: import.meta.env.DEV,
+    IS_PROD: import.meta.env.PROD,
+    MODE: import.meta.env.MODE,
   },
 } as const;
 
