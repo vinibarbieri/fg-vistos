@@ -58,11 +58,11 @@ export const Checkout = () => {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span>País:</span>
-                <span className="font-medium">{orderData.plans.visa.country}</span>
+                <span className="font-medium">{orderData.plans.visas.country}</span>
               </div>
               <div className="flex justify-between">
                 <span>Visto:</span>
-                <span className="font-medium">{orderData.plans.visa.name}</span>
+                <span className="font-medium">{orderData.plans.visas.name}</span>
               </div>
               <div className="flex justify-between">
                 <span>Plano:</span>
