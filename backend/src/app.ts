@@ -5,6 +5,7 @@ import { testConnection } from './config/database';
 import paymentsRouter from './routes/payments';
 import visasRouter from './routes/visas';
 import plansRouter from './routes/plans';
+import registerRouter from './routes/register';
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -39,6 +40,7 @@ app.get('/health', (req, res) => {
 app.use('/api/payments', paymentsRouter);
 app.use('/api/visas', visasRouter);
 app.use('/api/plans', plansRouter);
+app.use('/api/register', registerRouter);
 
 // Middleware de tratamento de erros
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

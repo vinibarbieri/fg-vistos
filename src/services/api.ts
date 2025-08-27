@@ -148,4 +148,14 @@ export const paymentsApi = {
     apiService.post<any>('/api/payments/check-status', data),
 };
 
+export const authApi = {
+  // Registrar novo usuário
+  register: (data: any) => 
+    apiService.post<any>('/api/auth/register', data),
+  
+  // Verificar se email já existe
+  checkEmail: (data: any) => 
+    apiService.post<any>('/api/auth/check-email', data),
+};
+
 export default apiService;
