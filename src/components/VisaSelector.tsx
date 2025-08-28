@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Check, Loader2, AlertCircle } from 'lucide-react';
+import { Check, Loader2, AlertCircle, CreditCard } from 'lucide-react';
 import { cnCountries, Country, isValidCountryKey } from '@/cn/cnCountries';
 import { useVisaPlans } from '@/hooks/useVisaPlans';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -144,8 +144,22 @@ const VisaSelector = ({ selectedCountryProp, showWhatsAppButton = false, filtere
                 <Card key={plan.id} className={`relative flex flex-col ${index === 1 ? 'border-primary border-2 transform scale-105' : ''}`}>
                   <CardHeader className="text-center">
                     <CardTitle className="text-xl text-secondary">{plan.plan_name}</CardTitle>
-                    <div className="text-3xl font-bold text-primary">{formatPrice(plan.price)}</div>
-                    <p className="text-sm text-gray-500 mt-2">* Valor não inclui taxa consular</p>
+                    
+                    <p className="text-gray-500 text-sm ">* Valor não inclui taxa consular</p>
+
+                    {/* Preço e PIX */}
+                    <div className="flex items-center justify-center gap-1 mb-4">
+                      <div className="text-3xl font-bold text-primary">{formatPrice(plan.price)}</div>
+                        <span className="text-red-700 text-sm font-semibold">PIX</span>
+                    </div>
+                    
+                    {/* Observações */}
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center justify-center gap-2 text-secondary font-medium">
+                        <CreditCard className="h-4 w-4" />
+                        <span>Parcele em até 12x com juros</span>
+                      </div>
+                    </div>
                   </CardHeader>
                   <CardContent className="flex flex-col flex-1">
                     <ul className="space-y-3 mb-6">
