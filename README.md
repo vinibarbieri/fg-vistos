@@ -1,7 +1,5 @@
 # FG Vistos - Especialistas em Vistos
 
-![FG Vistos Logo](public/fg-logo.svg)
-
 ## 📋 Descrição
 
 FG Vistos é uma plataforma web moderna e responsiva desenvolvida para oferecer serviços especializados em vistos consulares, autorização eletrônica (ETA) e representação consular. O projeto apresenta uma interface intuitiva e profissional para clientes que buscam assessoria completa em processos de imigração.
