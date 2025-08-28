@@ -1,188 +1,195 @@
-# FG Vistos - Especialistas em Vistos
+# FG Vistos - Site Oficial da Agência de Vistos
 
-## 📋 Descrição
+<div align="center">
 
-FG Vistos é uma plataforma web moderna e responsiva desenvolvida para oferecer serviços especializados em vistos consulares, autorização eletrônica (ETA) e representação consular. O projeto apresenta uma interface intuitiva e profissional para clientes que buscam assessoria completa em processos de imigração.
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-5.4.1-646CFF?style=for-the-badge&logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.11-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)
 
-## ✨ Funcionalidades
+**Site oficial da agência com arquitetura moderna, integração de pagamentos e interface responsiva**
 
-### 🏠 Página Inicial
-- **Hero Section**: Apresentação impactante dos serviços
-- **Seletor de Vistos**: Interface interativa para escolha de destinos
-- **Por que nos escolher**: Diferenciais da empresa
-- **Roadmap do Processo**: Etapas claras do serviço
-- **Depoimentos**: Testimonials de clientes (opcional)
+[🌐 Site Demo](https://vinibarbieri.github.io/fg-vistos/) • [📊 Plataforma de Gestão FG Vistos](https://github.com/vinibarbieri/fg-vistos-app)
 
-### 🛂 Página de Vistos
-- **Seletor de Serviços**: Vistos, ETA e Representação Consular
-- **Vitrine de Destinos**: Apresentação visual dos países
-- **Planos Personalizados**: Diferentes opções de serviço
-- **FAQ Dinâmico**: Perguntas frequentes por destino
-
-### 📞 Página de Contato
-- Formulário de contato completo
-- Informações de localização
-- Canais de atendimento
-
-### ℹ️ Sobre Nós
-- História da empresa
-- Missão e valores
-- Equipe especializada
-
-## 🛠️ Tecnologias Utilizadas
-
-### Frontend
-- **React 18** - Biblioteca JavaScript para interfaces
-- **TypeScript** - Tipagem estática para JavaScript
-- **Vite** - Build tool e dev server
-- **React Router DOM** - Roteamento da aplicação
-- **Tailwind CSS** - Framework CSS utilitário
-- **Shadcn/ui** - Componentes UI modernos
-- **Radix UI** - Componentes acessíveis e customizáveis
-
-### Bibliotecas de UI/UX
-- **Framer Motion** - Animações fluidas
-- **Lucide React** - Ícones modernos
-- **React Hook Form** - Gerenciamento de formulários
-- **Zod** - Validação de schemas
-- **Sonner** - Notificações toast
-- **Recharts** - Gráficos e visualizações
-
-### Estado e Dados
-- **TanStack Query** - Gerenciamento de estado do servidor
-- **React Query** - Cache e sincronização de dados
-
-### Desenvolvimento
-- **ESLint** - Linting de código
-- **PostCSS** - Processamento CSS
-- **Autoprefixer** - Prefixos CSS automáticos
-
-## 🚀 Instalação e Execução
-
-### Pré-requisitos
-- Node.js (versão 18 ou superior)
-- npm ou yarn
-
-### Passos para instalação
-
-1. **Clone o repositório**
-```bash
-git clone https://github.com/vinibarbieri/fg-vistos.git
-cd fg-vistos
-```
-
-2. **Instale as dependências**
-```bash
-npm install
-# ou
-yarn install
-```
-
-3. **Execute em modo de desenvolvimento**
-```bash
-npm run dev
-# ou
-yarn dev
-```
-
-4. **Acesse a aplicação**
-Abra [http://localhost:5173](http://localhost:5173) no seu navegador.
-
-## 📦 Scripts Disponíveis
-
-```bash
-# Desenvolvimento
-npm run dev          # Inicia o servidor de desenvolvimento
-
-# Build
-npm run build        # Build para produção
-npm run build:dev    # Build para desenvolvimento
-
-# Deploy
-npm run predeploy    # Executa build antes do deploy
-npm run deploy       # Deploy para GitHub Pages
-
-# Qualidade de código
-npm run lint         # Executa ESLint
-npm run preview      # Preview do build de produção
-```
-
-## 🏗️ Estrutura do Projeto
-
-```
-fg-vistos/
-├── public/                 # Arquivos estáticos
-├── src/
-│   ├── assets/            # Imagens e recursos
-│   ├── components/        # Componentes React
-│   │   ├── ui/           # Componentes base (shadcn/ui)
-│   │   ├── Navbar.tsx    # Navegação principal
-│   │   ├── Hero.tsx      # Seção hero
-│   │   ├── VisaSelector.tsx # Seletor de vistos
-│   │   └── ...           # Outros componentes
-│   ├── pages/            # Páginas da aplicação
-│   │   ├── Index.tsx     # Página inicial
-│   │   ├── Vistos.tsx    # Página de vistos
-│   │   ├── Contato.tsx   # Página de contato
-│   │   └── ...           # Outras páginas
-│   ├── hooks/            # Custom hooks
-│   ├── lib/              # Utilitários e configurações
-│   ├── cn/               # Utilitários de classes CSS
-│   ├── App.tsx           # Componente principal
-│   └── main.tsx          # Ponto de entrada
-├── dist/                 # Build de produção
-├── package.json          # Dependências e scripts
-├── vite.config.ts        # Configuração do Vite
-├── tailwind.config.ts    # Configuração do Tailwind
-└── tsconfig.json         # Configuração do TypeScript
-```
-
-## 🎨 Design System
-
-O projeto utiliza um design system consistente baseado em:
-
-- **Cores**: Paleta personalizada com cores primárias e secundárias
-- **Tipografia**: Fonte Poppins para melhor legibilidade
-- **Componentes**: Sistema de componentes reutilizáveis com shadcn/ui
-- **Responsividade**: Design mobile-first com breakpoints otimizados
-- **Acessibilidade**: Componentes acessíveis seguindo padrões WCAG
-
-## 📱 Responsividade
-
-A aplicação é totalmente responsiva e otimizada para:
-- 📱 Dispositivos móveis
-- 📱 Tablets
-- 💻 Desktops
-- 🖥️ Telas grandes
-
-## 🔧 Configuração de Deploy
-
-O projeto está configurado para deploy automático no GitHub Pages:
-
-1. **Build de produção**
-```bash
-npm run build
-```
-
-2. **Deploy automático**
-```bash
-npm run deploy
-```
-
-## 📄 Licença
-
-Este projeto é privado e desenvolvido para FG Vistos.
-
-## 👥 Equipe
-
-- **Desenvolvimento**: Vini Barbieri
-- **Design**: FG Vistos
-- **Conteúdo**: FG Vistos
-
-## 📞 Suporte
-
-Para suporte técnico ou dúvidas sobre o projeto, entre em contato através dos canais oficiais da FG Vistos.
+</div>
 
 ---
 
-**FG Vistos** - Especialistas em vistos consulares, autorização eletrônica e representação consular.
+## 🎯 **Sobre o Projeto**
+
+**FG Vistos** é o site oficial da agência de vistos FG Visto, desenvolvido como uma solução completa e personalizada que inclui:
+
+- **Frontend React** com interface moderna e responsiva
+- **Backend Node.js** com API REST robusta
+- **Sistema de pagamentos** integrado com InfinitePay
+- **Banco de dados** PostgreSQL via Supabase
+- **Autenticação JWT** e gestão de usuários
+- **Integração com Plataforma de gestão** para acompanhamento de processo do visto
+
+### ✨ **Funcionalidades do Site**
+
+- 🛂 **Seletor de Vistos Inteligente** - Interface interativa para escolha de destinos
+- 🌍 **Vitrine de Países** - Apresentação visual dos destinos oferecidos pela agência
+- 💳 **Sistema de Pagamentos** - Integração completa com gateway de pagamento
+- 📱 **Design Responsivo** - Funciona perfeitamente em todos os dispositivos
+- 🔐 **Gestão de Usuários** - Sistema de registro e autenticação para clientes
+
+---
+
+## 🚀 **Tecnologias Utilizadas**
+
+### **Frontend**
+- **React 18.3.1** - Biblioteca principal com hooks modernos
+- **TypeScript 5.5.3** - Tipagem estática para código robusto
+- **Vite 5.4.1** - Build tool ultra-rápido
+- **Tailwind CSS 3.4.11** - Framework CSS utilitário
+- **Radix UI** - Componentes acessíveis e customizáveis
+- **Framer Motion** - Animações fluidas e interativas
+- **React Hook Form** - Gerenciamento de formulários
+- **React Query** - Gerenciamento de estado do servidor
+
+### **Backend**
+- **Node.js** - Runtime JavaScript
+- **Express.js** - Framework web minimalista
+- **TypeScript** - Tipagem estática
+- **JWT** - Autenticação segura
+- **Zod** - Validação de dados
+- **Helmet** - Headers de segurança
+
+### **Banco de Dados & Infraestrutura**
+- **Supabase** - Backend-as-a-Service com PostgreSQL
+- **PostgreSQL** - Banco de dados relacional
+- **InfinitePay** - Gateway de pagamentos
+
+### **Ferramentas de Desenvolvimento**
+- **ESLint** - Linting de código
+- **PostCSS** - Processamento CSS
+- **GitHub Pages** - Deploy automático
+
+---
+
+## 🏗️ **Arquitetura do Sistema**
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │    Backend      │    │   Database      │
+│   React + TS    │◄──►│   Node.js       │◄──►│   Supabase      │
+│   Vite + Tailwind│    │   Express       │    │   PostgreSQL    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   InfinitePay   │    │   JWT Auth      │    │   File Storage  │
+│   Gateway       │    │   Validation    │    │   & CDN         │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+### **Estrutura de Pastas**
+```
+src/
+├── components/          # Componentes React reutilizáveis
+│   ├── ui/             # Componentes base (Radix UI)
+│   ├── VisaSelector.tsx # Seletor principal de vistos
+│   ├── Checkout.tsx    # Sistema de pagamento
+│   └── ...
+├── pages/              # Páginas da aplicação
+├── services/           # Serviços externos (API, pagamentos)
+├── hooks/              # Custom hooks React
+├── types/              # Definições TypeScript
+└── utils/              # Funções utilitárias
+```
+
+---
+
+## 🚀 **Como Executar o Projeto**
+
+### **Pré-requisitos**
+- Node.js 18+ 
+- Yarn ou npm
+- Conta no Supabase
+- Conta no InfinitePay
+
+### **Instalação Frontend**
+```bash
+# Clonar o repositório
+git clone https://github.com/vinibarbieri/fg-vistos.git
+cd fg-vistos
+
+# Instalar dependências
+yarn install
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com suas configurações
+
+# Executar em desenvolvimento
+yarn dev
+
+# Build para produção
+yarn build
+```
+
+> **⚠️ Importante:** O backend ainda não está hospedado em produção. Para testar todas as funcionalidades da demo, é necessário executar o backend localmente seguindo as instruções abaixo.
+
+### **Instalação Backend**
+```bash
+cd backend
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+
+# Executar
+npm run dev
+```
+
+---
+
+## 💡 **Características do Site**
+
+### **1. Seletor de Vistos Personalizado**
+- **Seleção dinâmica** dos países atendidos pela agência
+- **Cálculo automático** de preços e taxas específicos
+- **Validação em tempo real** de formulários
+- **Integração direta** com sistema de pagamentos
+
+### **2. Sistema de Pagamentos Integrado**
+- **Integração nativa** com InfinitePay para a agência
+- **Suporte a PIX e cartão** de crédito
+- **Webhooks seguros** para confirmação de pagamentos
+- **Gestão de status** em tempo real
+
+### **3. Arquitetura Profissional**
+- **Separação clara** entre frontend e backend
+- **API REST** bem estruturada para a operação da agência
+- **Middleware de segurança** (JWT, rate limiting)
+- **Validação de dados** com Zod
+
+### **4. Interface Moderna e Responsiva**
+- **Design system** consistente com Radix UI
+- **Animações fluidas** com Framer Motion
+- **Responsividade completa** para mobile
+- **Experiência do usuário** otimizada para clientes da agência
+
+---
+
+## 📱 **Demonstração**
+
+- **Site Demo**: [https://vinibarbieri.github.io/fg-vistos/](https://vinibarbieri.github.io/fg-vistos/)
+- **Repositório**: [GitHub](https://github.com/vinibarbieri/fg-vistos)
+
+> **📝 Nota:** O site online mostra apenas o frontend. Para testar funcionalidades completas (pagamentos, banco de dados, etc.), execute o backend localmente conforme as instruções de instalação.
+
+---
+
+## 📞 **Contato**
+
+- **Desenvolvedor**: Vinicius Barbieri
+- **Email**: vinibarbieri.dev@gmail.com
+- **LinkedIn**: [Vinicius De Paola Barbieri](linkedin.com/in/vinibarbieri)
+- **GitHub**: [@vinibarbieri](https://github.com/vinibarbieri)
+
+---
