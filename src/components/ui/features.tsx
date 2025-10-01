@@ -12,19 +12,21 @@ interface FeaturesProps {
   primaryColor?: string;
   progressGradientLight?: string;
   progressGradientDark?: string;
-  onFeatureChange?: (index: number) => void;
+  onFeatureChange: (index: number) => void;
+  activeFeatureIndex: number;
 }
 
 export function Features({
   features,
   onFeatureChange,
+  activeFeatureIndex,
 }: FeaturesProps) {
-  const [currentFeature, setCurrentFeature] = useState(0);
+  // const [currentFeature, setCurrentFeature] = useState(activeFeatureIndex);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const activeFeatureElement = featureRefs.current[currentFeature];
+    const activeFeatureElement = featureRefs.current[activeFeatureIndex];
     const container = containerRef.current;
 
     if (activeFeatureElement && container) {
@@ -38,16 +40,10 @@ export function Features({
         behavior: "smooth",
       });
     }
-  }, [currentFeature]);
-
-  useEffect(() => {
-    if (onFeatureChange) {
-      onFeatureChange(currentFeature);
-    }
-  }, [currentFeature, onFeatureChange]);
+  }, [activeFeatureIndex]);
 
   const handleFeatureClick = (index: number) => {
-    setCurrentFeature(index);
+    onFeatureChange(index);
   };
 
   return (
@@ -67,11 +63,11 @@ export function Features({
           {/* Left Side - Features with Progress Lines */}
           <div
             ref={containerRef}
-            className="space-y-4 lg:space-y-8 overflow-x-auto overflow-hidden no-scrollbar lg:overflow-visible flex flex-col order-1 scroll-smooth"
+            className="space-y-4 lg:space-y-8 overflow-x-auto overflow-hidden no-scrollbar lg:overflow-visible flex flex-col order-1 scroll-smooth lg:col-span-1 col-span-full"
           >
             {features.map((feature, index) => {
               const Icon = feature.icon;
-              const isActive = currentFeature === index;
+              const isActive = activeFeatureIndex === index;
 
               return (
                 <div
@@ -85,7 +81,7 @@ export function Features({
                   {/* Feature Content */}
                   <div
                     className={`
-                    flex flex-row items-start space-x-4 p-3 w-full max-w-md md:max-w-lg lg:max-w-2xl transition-all duration-300
+                    flex flex-row items-start space-x-4 p-3 w-full lg:max-w-2xl md:max-w-2xl transition-all duration-300 mx-auto
                     ${
                       isActive
                         ? "bg-white dark:bg-black/80 shadow-xl dark:drop-shadow-lg rounded-xl border dark:border-none border-gray-200"
@@ -150,9 +146,9 @@ export function Features({
           </div>
 
           {/* Right Side - Image Display */}
-          <div className="relative order-1 max-w-lg mx-auto lg:order-2 hidden lg:block">
+          <div className="relative order-1 max-w-lg mx-auto lg:order-2 hidden lg:block lg:col-span-1">
             <motion.div
-              key={currentFeature}
+              key={activeFeatureIndex}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
@@ -161,8 +157,8 @@ export function Features({
             >
               <img
                 className="rounded-2xl border dark:border-none border-gray-50 shadow-lg dark:drop-shadow-lg w-full h-auto"
-                src={features[currentFeature].image}
-                alt={features[currentFeature].title}
+                src={features[activeFeatureIndex].image}
+                alt={features[activeFeatureIndex].title}
               />
             </motion.div>
           </div>

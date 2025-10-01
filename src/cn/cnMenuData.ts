@@ -12,17 +12,17 @@ export const cnServicesMenu: Omit<MenuItem, 'iconName'>[] = [
   {
     title: 'Vistos',
     description: 'Processamento completo de vistos para diversos países',
-    url: '/vistos'
+    url: '/vistos?service=0'
   },
   {
     title: 'Autorização Eletrônica (ETA)',
     description: 'Autorizações eletrônicas para viagens rápidas',
-    url: '/vistos'
+    url: '/vistos?service=1'
   },
   {
     title: 'Representação Consular',
     description: 'Serviços de representação em consulados',
-    url: '/vistos'
+    url: '/vistos?service=2'
   }
 ];
 

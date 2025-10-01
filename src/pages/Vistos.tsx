@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import VisaSelector from '@/components/VisaSelector';
@@ -16,8 +16,20 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 
 const Vistos = () => {
+  const [searchParams] = useSearchParams();
   const [selectedCountryKeyFromShowcase, setSelectedCountryKeyFromShowcase] = useState('');
   const [selectedService, setSelectedService] = useState(0); // 0: Vistos, 1: ETA, 2: Representação
+
+  // Lê o parâmetro da URL para definir o serviço inicial
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam !== null) {
+      const serviceIndex = parseInt(serviceParam, 10);
+      if (serviceIndex >= 0 && serviceIndex <= 2) {
+        setSelectedService(serviceIndex);
+      }
+    }
+  }, [searchParams]);
 
   const services = [
     {
@@ -65,6 +77,7 @@ const Vistos = () => {
       <Features 
         features={services}
         onFeatureChange={handleServiceChange}
+        activeFeatureIndex={selectedService}
       />
 
       {/* Conteúdo Condicional baseado no serviço selecionado */}
@@ -123,7 +136,7 @@ const Vistos = () => {
         /* Conteúdo para Representação Consular */
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-secondary mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6">
               Representação Consular
             </h2>
             <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
