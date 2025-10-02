@@ -1,4 +1,7 @@
 import { Logo } from "@/assets/images";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -19,29 +22,32 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Serviços</h3>
             <ul className="space-y-2 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Visto Americano</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Visto Canadense</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Visto Europeu</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Outros Países</a></li>
+              <li><a href="/vistos?service=0" className="hover:text-white transition-colors">Vistos Consulares</a></li>
+              <li><a href="/vistos?service=1" className="hover:text-white transition-colors">Autorização Eletrônica (ETA)</a></li>
+              <li><a href="/vistos?service=2" className="hover:text-white transition-colors">Representação Consular</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Empresa</h3>
             <ul className="space-y-2 text-sm text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Sobre Nós</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Nossa Equipe</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Depoimentos</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/sobre-nos" className="hover:text-white transition-colors">Sobre Nós</a></li>
+              <li><a href="/contato" className="hover:text-white transition-colors">Contato</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Contato</h3>
             <div className="space-y-2 text-sm text-gray-300">
-              <p>📱 WhatsApp: (11) 99999-9999</p>
-              <p>📧 contato@fgvistos.com.br</p>
-              <p>📍 São Paulo, SP</p>
+              <p><FontAwesomeIcon icon={faWhatsapp} /> WhatsApp: (48) 99823-1163</p>
+              <div className="flex items-center space-x-2">
+                <Mail size={14} />
+                <p>contato@fgvistos.com.br</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MapPin size={14} />
+                <p>Florianópolis, SC</p>
+              </div>
             </div>
           </div>
         </div>
