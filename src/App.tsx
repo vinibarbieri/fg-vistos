@@ -10,8 +10,8 @@ import SobreNos from "./pages/SobreNos";
 import Contato from "./pages/Contato";
 import NotFound from "./pages/NotFound";
 import { Checkout } from "./components/Checkout";
-import { UserRegistration } from "./components/UserRegistration";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
+import Cadastro from "./pages/Cadastro";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/vistos" element={<Vistos />} />
           <Route path="/sobre-nos" element={<SobreNos />} />
           <Route path="/contato" element={<Contato />} />
-          <Route path="/user-registration" element={<UserRegistration />} />
+          <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
 
