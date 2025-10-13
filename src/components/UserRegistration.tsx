@@ -1,5 +1,5 @@
 // src/components/UserRegistration.tsx
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useUserRegistration } from '@/hooks/useUserRegistration';
 import { Button } from '@/components/ui/button';
@@ -7,10 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
 import { UserRegistrationData } from '@/hooks/useUserRegistration';
-import { usePlanById } from '@/hooks/usePlanById';
-import { useVisasById } from '@/hooks/useVisasById';
 import { PlansT } from '@/types/PlansT';
 import { VisasT } from '@/types/VisasT';
 import { useDocumentById } from '@/hooks/useDocumentById';
@@ -32,8 +29,9 @@ export const UserRegistration = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Hook para buscar o visto - só executa quando o plano estiver carregado e tiver visa_id
-  const { visa, isLoading: isLoadingVisa, error: errorVisa } = useVisasById(
-    plan?.visa_id || '', 
+  const { documentData: visa, isLoading: isLoadingVisa, error: errorVisa } = useDocumentById<VisasT>(
+    plan?.visa_id || '',
+    'visas',
     !isLoadingPlan && !!plan?.visa_id
   );
 
@@ -132,7 +130,6 @@ export const UserRegistration = () => {
                   </Button>
                   <Input
                     id="quantity"
-                    type="number"
                     min="1"
                     value={formData.quantity}
                     onChange={(e) => setFormData({...formData, quantity: Math.max(1, Number(e.target.value))})}

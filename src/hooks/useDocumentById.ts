@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
  * @param document - Tipo de documento (ex: 'plans', 'visas')
  * @returns Objeto contendo o documento, estado de carregamento e possíveis erros
  */
-export const useDocumentById = <T = any>(id: string, document: string) => {
+export const useDocumentById = <T = any>(id: string, document: string, enabled: boolean = true) => {
     const [documentData, setDocumentData] = useState<T | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-        if (!id || !document) {
+        if (!id || !document || !enabled) {
             setDocumentData(null);
             setError(null);
             setIsLoading(false);
