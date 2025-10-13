@@ -9,7 +9,6 @@ import Vistos from "./pages/Vistos";
 import SobreNos from "./pages/SobreNos";
 import Contato from "./pages/Contato";
 import NotFound from "./pages/NotFound";
-import { Checkout } from "./components/Checkout";
 import { PaymentSuccess } from "./pages/PaymentSuccess";
 import Cadastro from "./pages/Cadastro";
 
@@ -29,7 +28,6 @@ const App = () => (
           <Route path="/sobre-nos" element={<SobreNos />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
 
           <Route path="*" element={<NotFound />} />
