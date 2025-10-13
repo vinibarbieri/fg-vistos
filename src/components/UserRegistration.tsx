@@ -14,7 +14,14 @@ import { useDocumentById } from '@/hooks/useDocumentById';
 
 export const UserRegistration = () => {
   const [searchParams] = useSearchParams();
-  const { handleSubmit } = useUserRegistration();
+  const { 
+    handleSubmit, 
+    orderData, 
+    isLoadingOrder, 
+    isCreatingCheckout, 
+    checkoutError,
+    isRegistrationComplete
+  } = useUserRegistration();
   const planId = searchParams.get('planId') || '';
   const { documentData: plan, isLoading: isLoadingPlan, error: errorPlan } = useDocumentById<PlansT>(planId, 'plans');
   
@@ -63,6 +70,15 @@ export const UserRegistration = () => {
     }
   };
 
+  // Determinar o estado de loading geral
+  const isProcessing = isLoading || isCreatingCheckout || isLoadingOrder;
+  
+  // Determinar o erro a mostrar
+  const displayError = error || checkoutError;
+  
+  // Se o registro estiver completo e estiver processando checkout, mostrar mensagem específica
+  const isInCheckoutFlow = isRegistrationComplete && (isCreatingCheckout || isLoadingOrder);
+
   if (isLoadingPlan) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -105,10 +121,10 @@ export const UserRegistration = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">
-              Complete seus dados para prosseguir
+              Complete seus dados para finalizar o pedido
             </CardTitle>
             <p className="text-sm text-gray-600">
-              Preencha as informações abaixo para criar sua conta e continuar com o pagamento
+              Preencha as informações abaixo para criar sua conta e prosseguir diretamente para o pagamento
             </p>
           </CardHeader>
           <CardContent>
@@ -231,21 +247,26 @@ export const UserRegistration = () => {
                 </div>
               </div>
 
-              {error && (
+              {displayError && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                  <p className="text-sm text-red-600">{error}</p>
+                  <p className="text-sm text-red-600">{displayError}</p>
                 </div>
               )}
               
-              <Button type="submit" className="w-full" disabled={isLoading} size="lg">
-                {isLoading ? (
+              <Button type="submit" className="w-full" disabled={isProcessing} size="lg">
+                {isProcessing ? (
                   <div className="flex items-center space-x-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    <span>Criando conta...</span>
+                    <span>
+                      {isLoading ? 'Criando conta...' : 
+                       isCreatingCheckout ? 'Preparando pagamento...' : 
+                       isLoadingOrder ? 'Carregando dados do pedido...' : 
+                       'Processando...'}
+                    </span>
                   </div>
                 ) : (
                   <div className="flex items-center space-x-2">
-                    <span>Continuar para Checkout</span>
+                    <span>Finalizar Pedido</span>
                   </div>
                 )}
               </Button>

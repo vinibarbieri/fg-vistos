@@ -3,6 +3,9 @@ import { ProfileT } from "@/types/ProfilesT";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "@/services/api";
+import { useInfinitePayCheckout } from "./useInfinitePayCheckout";
+import { useState, useEffect } from "react";
+import { INFINITEPAY_CONFIG } from "@/services/infinitePay_config";
 
 export interface UserRegistrationData extends ProfileT {
   password: string;
@@ -13,6 +16,27 @@ export const useUserRegistration = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const planId = searchParams.get('planId');
+    const [orderId, setOrderId] = useState<string | null>(null);
+    const [isRegistrationComplete, setIsRegistrationComplete] = useState(false);
+    
+    // Usar o hook seguro do InfinitePay
+    const { 
+      orderData, 
+      isLoadingOrder, 
+      isCreatingCheckout, 
+      checkoutError, 
+      createCheckout 
+    } = useInfinitePayCheckout(orderId);
+    
+    // Efeito para criar checkout automaticamente quando os dados da order estiverem carregados
+    useEffect(() => {
+      if (isRegistrationComplete && orderData && !isCreatingCheckout && !checkoutError) {
+        console.log('Dados da order carregados, criando checkout...');
+        createCheckout().catch((error) => {
+          console.error('Erro ao criar checkout:', error);
+        });
+      }
+    }, [isRegistrationComplete, orderData, isCreatingCheckout, checkoutError, createCheckout]);
     
     const handleSubmit = async (userData: UserRegistrationData) => {
       try {
@@ -33,8 +57,10 @@ export const useUserRegistration = () => {
         if (response.success) {
           console.log('Usuário registrado com sucesso:', response.data);
           
-          // Redirecionar para checkout com orderId
-          navigate(`/checkout?orderId=${response.data.order.id}`);
+          // Definir o orderId para ativar o hook useInfinitePayCheckout
+          setOrderId(response.data.order.id);
+          setIsRegistrationComplete(true);
+          
         } else {
           throw new Error(response.error || 'Erro ao registrar usuário');
         }
@@ -45,5 +71,13 @@ export const useUserRegistration = () => {
       }
     };
 
-    return { handleSubmit };
+    return { 
+      handleSubmit,
+      // Expor estados do checkout para o componente
+      orderData,
+      isLoadingOrder,
+      isCreatingCheckout,
+      checkoutError,
+      isRegistrationComplete
+    };
 };
