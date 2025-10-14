@@ -121,7 +121,7 @@ export const UserRegistration = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">
-              Complete seus dados para finalizar o pedido
+              Complete seus dados para finalizar a compra
             </CardTitle>
             <p className="text-sm text-gray-600">
               Preencha as informações abaixo para criar sua conta e prosseguir diretamente para o pagamento

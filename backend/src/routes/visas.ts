@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Listar tipos de visto por país (não precisa de autenticação para leitura)
-router.get('/:country_key', async (req, res) => {
+router.get('/country/:country_key', async (req, res) => {
   try {
     const { country_key } = req.params;
     

@@ -9,7 +9,7 @@ const userRegistrationSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
   email: z.string().email('Email inválido'),
   password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
-  quantity: z.number().min(1, 'Quantidade deve ser pelo menos 1'),
+  quantity: z.number().min(1, 'Quantidade deve ser pelo menos 1').max(100, 'Quantidade máxima de 100 applicants'),
   planId: z.string().min(1, 'ID do plano é obrigatório'),
 });
 
@@ -102,7 +102,52 @@ router.post('/', async (req, res) => {
 
     console.log('Order criada:', order);
 
-    // 5. Retornar sucesso com dados necessários
+    // 5. Criar applicants baseado na quantidade
+    const applicants = [];
+    
+    // Criar o applicant responsável (primeiro)
+    applicants.push({
+      responsible_user_id: profile.id,
+      order_id: order.id,
+      is_responsible: true,
+      name: name,
+      status: 'em_andamento',
+      form_answer: null,
+      form_status: null,
+      attachment_id: null
+    });
+
+    // Criar os applicants adicionais (não responsáveis)
+    for (let i = 1; i < quantity; i++) {
+      applicants.push({
+        responsible_user_id: profile.id,
+        order_id: order.id,
+        is_responsible: false,
+        name: '',
+        status: 'em_andamento',
+        form_answer: null,
+        form_status: null,
+        attachment_id: null
+      });
+    }
+
+    // Inserir todos os applicants no banco
+    const { data: createdApplicants, error: applicantsError } = await supabase
+      .from('applicants')
+      .insert(applicants)
+      .select();
+
+    if (applicantsError) {
+      console.error('Erro ao criar applicants:', applicantsError);
+      return res.status(500).json({
+        success: false,
+        error: 'Erro ao criar applicants'
+      });
+    }
+
+    console.log('Applicants criados:', createdApplicants?.length);
+
+    // 6. Retornar sucesso com dados necessários
     res.status(201).json({
       success: true,
       data: {

@@ -17,7 +17,7 @@ export const useCountryVisaTypes = ({ country_key }: { country_key: string }) =>
 
             try {
                 // Usar a nova rota do backend: /api/visas/country/:country_key
-                const response = await apiService.get<{ success: boolean; data: VisasT[] }>(`/api/visas/${country_key}`);
+                const response = await apiService.get<{ success: boolean; data: VisasT[] }>(`/api/visas/country/${country_key}`);
                 return response.data || [];
             } catch (error) {
                 console.error('Erro ao buscar tipos de visto:', error);
