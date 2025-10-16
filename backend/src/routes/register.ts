@@ -111,7 +111,7 @@ router.post('/', async (req, res) => {
       order_id: order.id,
       is_responsible: true,
       name: name,
-      status: 'em_andamento',
+      status: 'pendente',
       form_answer: null,
       form_status: null,
       attachment_id: null
@@ -124,7 +124,7 @@ router.post('/', async (req, res) => {
         order_id: order.id,
         is_responsible: false,
         name: '',
-        status: 'em_andamento',
+        status: 'pendente',
         form_answer: null,
         form_status: null,
         attachment_id: null

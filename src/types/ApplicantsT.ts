@@ -26,7 +26,7 @@ export type ApplicantsT = {
     */
    name: string
    /**
-    * @prop status - enum do status do processo [em_andamento, submetido, em_revisao, aprovado, rejeitado]
+    * @prop status - enum do status do processo [pendente, pago, documentos_enviados, documentos_em_analise, aprovado, rejeitado]
     */
    status: string
    /**
