@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { User } from 'lucide-react';
 import MobileSidebar from './MobileSidebar';
-import useScrollDirection from '@/hooks/useScrollDirection';
+import useNavbarVisibility from '@/hooks/useNavbarVisibility';
 import { cnMainMenu, MenuItem, getIconByName } from '@/cn';
 import { useMenuIcons } from '@/hooks/useMenuIcons';
 import {
@@ -18,7 +18,7 @@ import {
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const scrollDirection = useScrollDirection();
+  const navbarVisibility = useNavbarVisibility();
   const { getIconComponent } = useMenuIcons();
 
   // Dados para o MobileSidebar (mantendo compatibilidade)
@@ -76,7 +76,7 @@ const Navbar = () => {
 
   return (
     <nav className={`bg-white shadow-sm border-b sticky top-0 z-50 transition-transform duration-300 ease-in-out ${
-      scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+      navbarVisibility === 'hidden' ? '-translate-y-full' : 'translate-y-0'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
