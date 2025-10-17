@@ -14,7 +14,7 @@ const fetchPlans = async (visa_id: string | null): Promise<PlansT[]> => {
     }
 
     try {
-        const response = await apiService.get<{ success: boolean; data: PlansT[] }>(`/api/plans?visa_id=${visa_id}`);
+        const response = await apiService.get<{ success: boolean; data: PlansT[] }>(`/api/site-backend/plans?visa_id=${visa_id}`);
         return response.data || [];
     } catch (error) {
         console.error('Erro ao buscar planos:', error);

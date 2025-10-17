@@ -25,7 +25,7 @@ export const useDocumentById = <T = any>(id: string, document: string, enabled: 
             setError(null);
             
             try {
-                const response = await apiService.get<{ success: boolean; data: T }>(`/api/${document}/${id}`);
+                const response = await apiService.get<{ success: boolean; data: T }>(`/api/site-backend/${document}/${id}`);
 
                 console.log('Response:', response);
                 

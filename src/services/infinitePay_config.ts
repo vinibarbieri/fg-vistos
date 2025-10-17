@@ -4,7 +4,7 @@
 const getApiBaseUrl = () => {
   if (import.meta.env.DEV) {
     // Em desenvolvimento, usa proxy local para evitar CORS
-    return '/api/infinitepay';
+    return '/api/site-backend';
   }
   
   if (import.meta.env.MODE === 'staging') {
@@ -18,7 +18,7 @@ const getApiBaseUrl = () => {
 
 export const INFINITEPAY_CONFIG = {
   // Handle do InfinitePay (sua identificação única)
-  HANDLE: import.meta.env.VITE_INFINITEPAY_HANDLE || 'seu_handle_aqui',
+  HANDLE: import.meta.env.VITE_INFINITEPAY_HANDLE || '$fgvistos',
   
   // URLs da API - Configuração dinâmica baseada no ambiente
   API_BASE_URL: getApiBaseUrl(),
@@ -38,7 +38,7 @@ export const INFINITEPAY_CONFIG = {
   
   // Configurações de webhook
   WEBHOOK: {
-    URL: '/api/webhooks/infinitepay',
+    URL: '/api/site-backend/webhooks/infinitepay',
     TIMEOUT: 1000, // 1 segundo para resposta
   },
   
@@ -92,7 +92,7 @@ export const INFINITEPAY_CONFIG = {
 export const validateInfinitePayConfig = () => {
   const errors: string[] = [];
   
-  if (!INFINITEPAY_CONFIG.HANDLE || INFINITEPAY_CONFIG.HANDLE === 'seu_handle_aqui') {
+  if (!INFINITEPAY_CONFIG.HANDLE || INFINITEPAY_CONFIG.HANDLE === '$fgvistos') {
     errors.push('VITE_INFINITEPAY_HANDLE não está configurado corretamente');
   }
   

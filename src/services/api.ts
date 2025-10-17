@@ -119,61 +119,61 @@ export const apiService = new ApiService();
 export const vistosApi = {
   // Listar vistos com paginação
   list: (page = 1, limit = 10) => 
-    apiService.get<any>(`/api/vistos?page=${page}&limit=${limit}`),
+    apiService.get<any>(`/api/site-backend/vistos?page=${page}&limit=${limit}`),
   
   // Buscar visto por ID
   getById: (id: string) => 
-    apiService.get<any>(`/api/vistos/${id}`),
+    apiService.get<any>(`/api/site-backend/vistos/${id}`),
   
   // Criar novo visto
   create: (data: any) => 
-    apiService.post<any>('/api/vistos', data),
+    apiService.post<any>('/api/site-backend/vistos', data),
   
   // Atualizar visto
   update: (id: string, data: any) => 
-    apiService.put<any>(`/api/vistos/${id}`, data),
+    apiService.put<any>(`/api/site-backend/vistos/${id}`, data),
   
   // Deletar visto
   delete: (id: string) => 
-    apiService.delete<any>(`/api/vistos/${id}`),
+    apiService.delete<any>(`/api/site-backend/vistos/${id}`),
 };
 
 export const paymentsApi = {
   // Criar checkout
   createCheckout: (data: any) => 
-    apiService.post<any>('/api/payments/create-checkout', data),
+    apiService.post<any>('/api/site-backend/payments/create-checkout', data),
   
   // Verificar status do pagamento
   checkStatus: (data: any) => 
-    apiService.post<any>('/api/payments/check-status', data),
+    apiService.post<any>('/api/site-backend/payments/check-status', data),
 };
 
 export const authApi = {
   // Registrar novo usuário
   register: (data: any) => 
-    apiService.post<any>('/api/register', data),
+    apiService.post<any>('/api/site-backend/register', data),
   
   // Verificar se email já existe
   checkEmail: (data: any) => 
-    apiService.post<any>('/api/register/check-email', data),
+    apiService.post<any>('/api/site-backend/register/check-email', data),
 };
 
 export const checkoutApi = {
   // Buscar dados da order
   getOrder: (orderId: string) => 
-    apiService.get<any>(`/api/checkout/order/${orderId}`),
+    apiService.get<any>(`/api/site-backend/order/${orderId}`),
   
   // Atualizar status de pagamento
   updatePaymentStatus: (orderId: string, data: any) => 
-    apiService.put<any>(`/api/checkout/order/${orderId}/payment-status`, data),
+    apiService.put<any>(`/api/site-backend/order/${orderId}/payment-status`, data),
   
   // Verificar status de pagamento
   checkPayment: (data: any) => 
-    apiService.post<any>('/api/checkout/payment/check', data),
+    apiService.post<any>('/api/site-backend/checkout/payment/check', data),
   
   // Processar retorno do pagamento
   processPaymentReturn: (data: any) => 
-    apiService.post<any>('/api/checkout/payment/return', data),
+    apiService.post<any>('/api/site-backend/checkout/payment/return', data),
 };
 
 export default apiService;
